@@ -6,13 +6,95 @@ module.exports = (function($)
     var interval;
     var timeRemaining, timeStart;
 
+    var bsModal = $("#bsModal");
+    var bsModalCloseButton = $("#bsModalCloseButton");
+    var bsModalHeadline = $("#bsModalHeadline");
+    var bsModalFooter = $("#bsModalFooter");
+    var bsModalBody = $("#bsModalBody");
+    var bsModalExecuteButton = $("#bsModalExecuteButton");
+    var bsModalCloseButtonFooter = $("#bsModalCloseButtonFooter");
+
     return {
-        findModal: findModal
+        findModal: findModal,
+        openModal: openModal,
+        hideModal: hideModal
     };
 
     function findModal(element)
     {
         return new Modal(element);
+    }
+
+    /**
+     * config:
+     *      showSaveButton
+     *      executeButtonCaption
+     *      onExecute
+     *      onClose
+     *      headline
+     *      body
+     *      displayCloseButton
+     *
+     * @param config
+     */
+    function openModal(config)
+    {
+        clearModal();
+        initModalContent(config);
+        setEventHandler(config);
+        bsModal.modal('show');
+    }
+
+    function initModalContent(config)
+    {
+        bsModalHeadline.text(config.headline);
+        bsModalBody.append(config.body.clone(true, true));
+        bsModalExecuteButton.text(config.executeButtonCaption);
+
+        if(config.displayCloseButton)
+        {
+            bsModalCloseButtonFooter.show();
+        }
+        else
+        {
+            bsModalCloseButtonFooter.hide();
+        }
+    }
+
+    function clearModal()
+    {
+        bsModalCloseButton.off("click");
+        bsModalExecuteButton.off("click");
+        bsModalCloseButtonFooter.off("click");
+        bsModalBody.empty();
+    }
+
+    function setEventHandler(config)
+    {
+        bsModalCloseButton.click(
+            function ()
+            {
+                config.onClose();
+                hideModal();
+            });
+
+        bsModalExecuteButton.click(
+            function ()
+            {
+                config.onExecute();
+            });
+
+        bsModalCloseButtonFooter.click(
+            function ()
+            {
+                config.onClose();
+                hideModal();
+            });
+    }
+
+    function hideModal()
+    {
+        bsModal.modal('hide');
     }
 
     function Modal(element)

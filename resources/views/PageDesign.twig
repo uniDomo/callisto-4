@@ -45,6 +45,26 @@
 
             <!-- Register Modal -->
             {% include "PluginCallisto::Templates.Registration.SimpleRegistrationModal" %}
+
+            <div id="bsModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" aria-label="Close">
+                                <span id="bsModalCloseButton" aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 id="bsModalHeadline" class="modal-title"></h4>
+                        </div>
+
+                        <div id="bsModalBody" class="modal-body"></div>
+
+                        <div id="bsModalFooter" class="modal-footer">
+                            <button id="bsModalCloseButtonFooter" type="button" class="btn btn-secondary">Schließen</button>
+                            <button id="bsModalExecuteButton" type="button" class="btn btn-primary"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {% include "PluginCallisto::Templates.Main" %}
