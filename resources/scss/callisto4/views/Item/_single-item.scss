@@ -62,6 +62,24 @@
 
 
 #single-big-image {
+    border: 1px solid $gray-lighter;
+    
+    &.owl-carousel{
+        width: 100%!important;
+
+        .owl-stage-outer{
+          width: 100%!important;
+        }
+
+        .owl-stage {
+            width: 100%!important;
+        }
+
+        .owl-item {
+            width: 100%!important;
+        }
+    }
+
     .owl-controls {
         position: absolute;
         top: 50%;
@@ -86,7 +104,13 @@
     .owl_item{
         margin: 5px;
         a {
+        width: 100%;
+
+        a {
+            display: block;
             width: 100%;
+
+            @include img-contain();
         }
     }
 }
@@ -130,7 +154,6 @@
 .availability_3,
 .availability_4 {background-color: $availability_3;}
 .availability_5 {background-color: $availability_5;}
-
 
 .rating{
     .tag{

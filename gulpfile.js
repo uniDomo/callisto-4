@@ -6,7 +6,7 @@ const OUTPUT_PREFIX = 'plugin-callisto';
 
 // import gulp
 var gulp = require('gulp');
-var gutil = require('gulp-util')
+var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var del = require('del');
@@ -68,7 +68,7 @@ gulp.task('build:app', function() {
         .pipe( concat( OUTPUT_PREFIX + '-app.js') )
         .pipe( sourcemaps.write('.', {includeContent: false, sourceRoot: '../src'}) )
         .pipe( gulp.dest( JS_DIST ) );
-})
+});
 
 gulp.task('build:vendor', function() {
     var libraries = require(JS_SRC + 'vendor.json');

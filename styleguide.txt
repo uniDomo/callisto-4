@@ -1,0 +1,110 @@
+Naming:
+- All Files are named in UpperCamelCase
+- Avoid duplicate namings if not necessary:
+	e.g. 'view/Item/SingleItemView.twig' => 'view/Item/SingleItem.twig'
+	or 	'js/src/app/components/Login/LoginVueComponent.js' => 'js/src/app/components/Login/Login.js'
+- Names of files or directories should describe usage/ function of file in correct way:
+	e.g. 'PaymentShippingService.twig' => 'PaymentShippingList.twig' (Twig cannot provide services)
+- Vue.js-Components are stored as 'resources/js/src/app/components/<COMPONENT_NAME>/<COMPONENT_NAME>.js'
+  Depending templates are stored as 'resources/views/Templates/<COMPONENT_NAME>/<COMPONENT_NAME>.twig'
+  Do not use <template>-Tag. Use <script type="x/template"> instead.
+  Template-IDs has to be valid HTML-selectors and must be unique. Use format: 'vue-<COMPONENT_NAME_SNAKE_CASE>'
+- Twig-Templates are stored in 'resources/views' and should be grouped by usecases:
+	-> Blog/		for templates related to blog contents
+	-> Checkout/	templates required for checkout (including basket)
+	-> Content/		templates for displaying static content
+	-> Item/		templates or snippets to display item data (containing also list items included in Item-Category-Lists)
+	-> PageDesign/	global templates for basic page design, e.g. header, footer, newsletter etc.
+  If a single layout-component requires multiple twig-files (e.g. parent-/child-templates, macros), the should be grouped in subfolders
+
+
+PluginCallisto/
+    +-- meta // Plugin meta-information, e.g. plugin-icon or preview images
+    |   +-- images
+    |   |   +-- preview_[0-6].[png | jpeg]
+    |   |   +-- icon_plugin_[xs | sm | md].[png | jpeg]
+    |   |   +-- icon_author_[xs | sm | md].[png | jpeg]
+    |
+    +-- resources
+    |   +-- css	// auto-generated .css-files (compiled scss output)
+    |	+-- documents
+    |	|	+-- fonts
+    |	|
+    |   +-- images
+    |   +-- js
+    |	|	+-- dist // auto-generated .js-files (concatinated, uglified, minified js output)
+    |	|	+-- src  // js source files
+    |	|	|	+-- app	// custom js sources
+    |	|	|	|	+-- components	// Vue.js components
+    |	|	|	|	|	+-- <COMPONENT_NAME>
+    |	|	|	|	|	|	+-- <COMPONENT_NAME>.js
+    |	|	|	|	|	|	+-- ...
+    |	|	|	|	|
+    |	|	|	|	+-- servies // js services (logical components, no Vue.js related contents)
+    |	|	|	|	|	+-- <SERVICE_NAME>.js
+    |	|	|	|	|
+    |	|	|	|	+-- main.js // main Vue.js app-initialization
+    |	|	|	|
+    |	|	|	+-- libraries
+    |	|	|	|	+-- ... // additional js-libraries (will be combined to 'plugin-callisto-vendor.js')
+    |	|	|	|
+    |	|	|	+-- app.config.js // global app configurations
+    |	|	|	+-- vendor.json   // external libraries (e.g. node_modules) to include in 'plugin-callisto-vendor.js'
+    |	|
+    |   +-- lang
+    |	+-- scss
+    |	|	+-- bootstrap
+    |	|	+-- font-awesome
+    |	|	+-- ... // additional style-libraries
+    |	|	+-- plugin-callisto // custom scss files
+    |	|	+-- PluginCallisto.scss // main scss file. should include required libraries and custom files
+    |	|
+    |   +-- views
+    |	|	+-- Blog // templates to display blog information
+    |	|	|	+-- ...
+    |	|	|
+    |	|	+-- Checkout // templates related to checkout
+    |	|	|	+-- Basket
+    |	|	|	|	+-- BasketItemList.twig
+    |	|	|	|	+-- BasketTotals.twig
+    |	|	|	|	+-- ...
+    |	|	|	|
+    |	|	|	+-- ... // additional templates to display several checkout steps
+    |	|	|
+    |	|	+-- Content // templates to display static content
+    |	|	|	+-- CategoryContent.twig
+    |	|	|	+-- ...
+    |	|	|
+    |	|	+-- Item // templates to display item data
+    |	|	|	+-- BasketPreviewItem.twig
+    |	|	|	+-- BasketItem.twig
+    |	|	|	+-- ItemListItem.twig
+    |	|	|	+-- SingleItem.twig
+    |	|	|	+-- ...
+    |	|	|
+    |	|	+-- PageDesign // global templates displayed across multiple pages
+    |	|	|	+-- Header
+    |	|	|	|	+-- Header.twig
+    |	|	|	|	+-- ...
+    |	|	|
+    |	|	|	+-- Footer
+    |	|	|	|	+-- Footer.twig
+    |	|	|	|	+-- NewsletterForm.twig
+    |	|	|	|	+-- PaymentProviderList.twig
+    |	|	|	|	+-- ShippingProviderList.twig
+    |	|	|	|	+-- ...
+    |	|	|
+    |	|	+-- Templates // templates used by Vue.js components
+    |	|	|	+-- <COMPONENT_NAME>
+    |	|	|	|	+-- <COMPONENT_NAME>.twig
+    |	|	|	|
+    |	|	|	+-- Main.twig // included in PageDesign. Should include all required Vue-component templates
+    |	|
+    +-- src
+    |	+-- Providers
+    |	|	+-- TemplateServiceProvider.hh
+    |	|
+    +-- config.json
+    +-- gulpfile.js
+    +-- package.json
+    +-- plugin.json
