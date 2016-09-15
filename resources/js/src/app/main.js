@@ -33,158 +33,135 @@ new Vue({
             singleItem           : true,
             slideSpeed           : 1000,
             navigation           : true,
-            autoWidth            : true,
-            navigationText       : [
-                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-            ],
-            pagination           : false,
-            afterAction          : syncPosition,
-            responsiveRefreshRate: 200,
-        });
+		    navigationText: [
+		      "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+		      "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+		    ],
+		    pagination:false,
+		    afterAction : syncPosition,
+		    responsiveRefreshRate : 200,
+		  });
 
-        sync2.owlCarousel({
-            items                : 8,
-            itemsDesktop         : [1199, 8],
-            itemsDesktopSmall    : [979, 8],
-            itemsTablet          : [768, 6],
-            itemsMobile          : [479, 4],
-            navigation           : true,
-            navigationText       : [
-                "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
-                "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
-            ],
-            pagination           : false,
-            responsiveRefreshRate: 100,
-            afterInit            : function(el)
-            {
-                el.find(".owl-item").eq(0).addClass("synced");
-            }
-        });
+		  sync2.owlCarousel({
+		    items : 8,
+		    itemsDesktop      : [1199,8],
+		    itemsDesktopSmall     : [979,8],
+		    itemsTablet       : [768,6],
+		    itemsMobile       : [479,4],
+		    navigation: true,
+		    navigationText: [
+		      "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+		      "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
+		    ],
+		    pagination:false,
+		    responsiveRefreshRate : 100,
+		    afterInit : function(el){
+		      el.find(".owl-item").eq(0).addClass("synced");
+		    }
+		  });
 
-        function syncPosition(el)
-        {
-            var current = this.currentItem;
-            $("#single-carousel")
-                .find(".owl-item")
-                .removeClass("synced")
-                .eq(current)
-                .addClass("synced")
-            if ($("#single-carousel").data("owlCarousel") !== undefined)
-            {
-                center(current)
-            }
-        }
+		  function syncPosition(el){
+		    var current = this.currentItem;
+		    $("#single-carousel")
+		      .find(".owl-item")
+		      .removeClass("synced")
+		      .eq(current)
+		      .addClass("synced")
+		    if($("#single-carousel").data("owlCarousel") !== undefined){
+		      center(current)
+		    }
+		  }
 
-        $("#single-carousel").on("click", ".owl-item", function(e)
-        {
-            e.preventDefault();
-            var number = $(this).data("owlItem");
-            sync1.trigger("owl.goTo", number);
-        });
+		  $("#single-carousel").on("click", ".owl-item", function(e){
+		    e.preventDefault();
+		    var number = $(this).data("owlItem");
+		    sync1.trigger("owl.goTo",number);
+		  });
 
-        function center(number)
-        {
-            var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-            var num          = number;
-            var found        = false;
-            for (var i in sync2visible)
-            {
-                if (num === sync2visible[i])
-                {
-                    found = true;
-                }
-            }
+		  function center(number){
+		    var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
+		    var num = number;
+		    var found = false;
+		    for(var i in sync2visible){
+		      if(num === sync2visible[i]){
+		        found = true;
+		      }
+		    }
 
-            if (found === false)
-            {
-                if (num > sync2visible[sync2visible.length - 1])
-                {
-                    sync2.trigger("owl.goTo", num - sync2visible.length + 2)
-                }
-                else
-                {
-                    if (num - 1 === -1)
-                    {
-                        num = 0;
-                    }
-                    sync2.trigger("owl.goTo", num);
-                }
-            }
-            else if (num === sync2visible[sync2visible.length - 1])
-            {
-                sync2.trigger("owl.goTo", sync2visible[1])
-            }
-            else if (num === sync2visible[0])
-            {
-                sync2.trigger("owl.goTo", num - 1)
-            }
+		    if(found===false){
+		      if(num>sync2visible[sync2visible.length-1]){
+		        sync2.trigger("owl.goTo", num - sync2visible.length+2)
+		      }else{
+		        if(num - 1 === -1){
+		          num = 0;
+		        }
+		        sync2.trigger("owl.goTo", num);
+		      }
+		    } else if(num === sync2visible[sync2visible.length-1]){
+		      sync2.trigger("owl.goTo", sync2visible[1])
+		    } else if(num === sync2visible[0]){
+		      sync2.trigger("owl.goTo", num-1)
+		    }
 
-        }
+		  }
 
-        var $toggleBasketPreview = $('#toggleBasketPreview, #closeBasketPreview');
 
-        $toggleBasketPreview.on('click', function(evt)
-        {
-            evt.preventDefault();
-            $('body').toggleClass('open-right');
-        });
 
-        $('#toggleBasketPreview').on('click', function(evt)
-        {
-            evt.preventDefault();
-            $('body').addClass('open-right');
-            $('.wrapper-main').one('click', closeNav);
-        });
+		var $toggleBasketPreview = $('#toggleBasketPreview, #closeBasketPreview');
 
-        $('#closeBasketPreview').on('click', function(evt)
-        {
-            evt.preventDefault();
-            closeBasketPreview();
-        });
+		$toggleBasketPreview.on('click', function( evt ){
+			evt.preventDefault();
+			$('body').toggleClass('open-right');
+		});
 
-        function closeBasketPreview()
-        {
-            $('body').removeClass('open-right');
-            $('.wrapper-main').off('click', closeNav);
-        }
+		$('#toggleBasketPreview').on('click', function( evt ){
+			evt.preventDefault();
+			$('body').addClass('open-right');
+      $('.wrapper-main').one('click', closeNav);
+		});
 
-        var $toggleListView = $('.toggle-list-view');
+    $('#closeBasketPreview').on('click', function( evt ){
+			evt.preventDefault();
+			closeBasketPreview();
+		});
 
-        $toggleListView.on('click', function(evt)
-        {
-            console.log('toggle-list-view click');
-            evt.preventDefault();
+    function closeBasketPreview(){
+			$('body').removeClass('open-right');
+      $('.wrapper-main').off('click', closeNav);
+		}
 
-            //toggle it's own state
-            $toggleListView.toggleClass('grid');
+		var $toggleListView = $('.toggle-list-view');
 
-            //toggle internal style of thumbs
-            $('.product-list, .cmp-product-thumb').toggleClass('grid');
-        });
+		$toggleListView.on('click', function( evt ){
+			console.log('toggle-list-view click');
+			evt.preventDefault();
 
-        $('#mainNavbarCollapse').collapse('hide');
+			//toggle it's own state
+			$toggleListView.toggleClass('grid');
 
-        //Add click listener outside the navigation to close it
-        $('#mainNavbarCollapse').on('show.bs.collapse', function()
-        {
-            $('.main').one('click', closeNav);
-        });
+			//toggle internal style of thumbs
+			$('.product-list, .cmp-product-thumb').toggleClass('grid');
+		});
 
-        $('#mainNavbarCollapse').on('hide.bs.collapse', function()
-        {
-            $('.main').off('click', closeNav)
-        });
+		$('#mainNavbarCollapse').collapse('hide');
 
-        function closeNav()
-        {
-            $('#mainNavbarCollapse').collapse('hide');
-        }
+		//Add click listener outside the navigation to close it
+		$('#mainNavbarCollapse').on('show.bs.collapse', function () {
+			$('.main').one('click', closeNav);
+		});
 
-    }
+		$('#mainNavbarCollapse').on('hide.bs.collapse', function () {
+			$('.main').off('click', closeNav)
+		});
 
-    window.CallistoMain = CallistoMain;
+		function closeNav(){
+			$('#mainNavbarCollapse').collapse('hide');
+		}
 
-    new CallistoMain();
+	}
+
+	window.CallistoMain = CallistoMain;
+
+	new CallistoMain();
 
 })(jQuery, window, document);

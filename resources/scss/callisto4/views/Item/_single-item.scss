@@ -41,23 +41,6 @@
             padding: .3rem;
         }
     }
-    .nav-tabs {
-        .nav-item {
-            float: none;
-            .nav-link {
-                border:1px solid $nav-tabs-border-color;
-                &.active,
-                &:hover {
-                    border:1px solid $nav-tabs-border-color;
-                    color: $gray-darker;
-                    background:$gray-lighter2;
-                }
-            }
-            &+.nav-item {
-                margin-left: 0;
-            }
-        }
-    }
 }
 
 
@@ -102,9 +85,10 @@
     }
 
     .owl_item{
-        margin: 5px;
         a {
-        width: 100%;
+            display: block;
+            width: 100%;
+            @include img-contain();
         }
     }
 }
@@ -201,30 +185,5 @@
          .price {
                 float: right;
             }
-    }
-}
-
-@include media-breakpoint-up(md) {
-    .single {
-        .nav-tabs {
-            .nav-item {
-                float: left;
-                .nav-link {
-                    border:1px solid $nav-tabs-border-color;
-                    &.active,
-                    &:hover {
-                        border:1px solid $nav-tabs-border-color;
-                        color: $gray;
-                        background:white;
-                    }
-                    &.active {
-                        border-bottom: 1px solid transparent;
-                    }
-                }
-                &+.nav-item {
-                    margin-left: .2rem;
-                }
-            }
-        }
     }
 }
