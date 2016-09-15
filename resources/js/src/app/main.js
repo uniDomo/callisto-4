@@ -33,6 +33,7 @@ new Vue({
 		    singleItem : true,
 		    slideSpeed : 1000,
 		    navigation: true,
+			autoWidth: true,
 		    navigationText: [
 		      "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
 		      "<i class='fa fa-chevron-right' aria-hidden='true'></i>"
@@ -84,7 +85,7 @@ new Vue({
 		    var found = false;
 		    for(var i in sync2visible){
 		      if(num === sync2visible[i]){
-		        var found = true;
+		        found = true;
 		      }
 		    }
 
@@ -114,6 +115,21 @@ new Vue({
 			$('body').toggleClass('open-right');
 		});
 
+		$('#toggleBasketPreview').on('click', function( evt ){
+			evt.preventDefault();
+			$('body').addClass('open-right');
+      $('.wrapper-main').one('click', closeNav);
+		});
+
+    $('#closeBasketPreview').on('click', function( evt ){
+			evt.preventDefault();
+			closeBasketPreview();
+		});
+
+    function closeBasketPreview(){
+			$('body').removeClass('open-right');
+      $('.wrapper-main').off('click', closeNav);
+		}
 
 		var $toggleListView = $('.toggle-list-view');
 
@@ -133,11 +149,11 @@ new Vue({
 		//Add click listener outside the navigation to close it
 		$('#mainNavbarCollapse').on('show.bs.collapse', function () {
 			$('.main').one('click', closeNav);
-		})
+		});
 
 		$('#mainNavbarCollapse').on('hide.bs.collapse', function () {
 			$('.main').off('click', closeNav)
-		})
+		});
 
 		function closeNav(){
 			$('#mainNavbarCollapse').collapse('hide');
