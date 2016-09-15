@@ -105,12 +105,6 @@
         margin: 5px;
         a {
         width: 100%;
-
-        a {
-            display: block;
-            width: 100%;
-
-            @include img-contain();
         }
     }
 }
