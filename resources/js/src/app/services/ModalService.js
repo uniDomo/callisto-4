@@ -27,13 +27,13 @@ module.exports = (function($)
 
     /**
      * config:
-     *      showSaveButton
+     *      showExecuteButton
      *      executeButtonCaption
      *      onExecute
      *      onClose
      *      headline
      *      body
-     *      displayCloseButton
+     *      showCloseButton
      *
      * @param config
      */
@@ -51,7 +51,7 @@ module.exports = (function($)
         bsModalBody.append(config.body.clone(true, true));
         bsModalExecuteButton.text(config.executeButtonCaption);
 
-        if(config.displayCloseButton)
+        if(config.showCloseButton)
         {
             bsModalCloseButtonFooter.show();
         }
