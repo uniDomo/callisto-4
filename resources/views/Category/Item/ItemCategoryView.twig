@@ -11,9 +11,6 @@
 {% set isInfiniteScrolling = paginationType == "infiniteScroll" %}
 {% set pageIndicator = "1 - " ~ maxCount %}
 
-{% set itemName = config("PluginCallisto.item.name") %}
-{% set itemData = config("PluginCallisto.item.data")|split(', ') %}
-
 {% if defaultItemPerPage < maxCount and not isInfiniteScrolling %}
     {% set pageIndicator = ((currentPage * defaultItemPerPage) - defaultItemPerPage + 1) ~ " - " ~ ((currentPage * defaultItemPerPage) > maxCount ? maxCount : (currentPage * defaultItemPerPage)) %}
 {% elseif isInfiniteScrolling and not (defaultItemPerPage > maxCount) %}
@@ -78,7 +75,8 @@
                             {% endif %}>
                         {% for item in itemList %}
                             <li>
-                              {% include "PluginCallisto::Templates.CategoryListItem.CategoryListItem" with { 'item': item } %}
+                                <category-list-item :item="{{ item | json_encode }}"
+                                                    base-url="{{ app.request.baseUrl }}"></category-list-item>
                             </li>
                         {% endfor %}
                     </ul>
