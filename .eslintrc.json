@@ -122,6 +122,7 @@
     "prefer-const"            : "warn",
     "valid-jsdoc"             : "warn",
     "guard-for-in"            : "off",
-    "padded-blocks"           : "off"
+    "padded-blocks"           : "off",
+    "no-warning-comments"     : "off"
   }
 }
