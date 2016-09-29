@@ -101,6 +101,7 @@ module.exports = (function($)
             .fail(function(jqXHR)
             {
                 var response = !!jqXHR.responseText ? $.parseJSON(jqXHR.responseText) : {};
+
                 if (!config.supressNotifications)
                 {
                     printMessages(response);
@@ -121,6 +122,7 @@ module.exports = (function($)
     function printMessages(response)
     {
         var notification;
+
         if (!!response.error && response.error.message.length > 0)
         {
             notification = NotificationService.error(response.error);

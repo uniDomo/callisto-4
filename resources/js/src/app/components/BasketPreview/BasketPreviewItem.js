@@ -1,6 +1,5 @@
 var BasketService         = require("services/BasketService");
 var MonetaryFormatService = require("services/MonetaryFormatService");
-var ModalService          = require("services/ModalService");
 
 Vue.component("basket-preview-item", {
 
@@ -22,6 +21,7 @@ Vue.component("basket-preview-item", {
     activate: function(done)
     {
         var self = this;
+
         BasketService.watch(function(data)
         {
             self.$set("basket", data.basket);
@@ -53,8 +53,6 @@ Vue.component("basket-preview-item", {
 
         deleteItem: function(basketItem, event)
         {
-            var _self = this;
-
             if ($(event.currentTarget).hasClass("btn-link"))
             {
                 this.toggleDeleteBtnClass(event.currentTarget);
@@ -94,7 +92,7 @@ Vue.component("basket-preview-item", {
 
             if (basketItem.quantity > 1 || value == 1)
             {
-                basketItem.quantity = basketItem.quantity + value;
+                basketItem.quantity += value;
                 $(this.$el.nextElementSibling).toggleClass("wait");
 
                 BasketService.updateBasketItem(basketItem)

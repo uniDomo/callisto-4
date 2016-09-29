@@ -10,7 +10,7 @@ module.exports = (function($)
 
     function parseShippingCountries(countryData, id)
     {
-        var countryList       = JSON.parse(countryData);
+        var countryList = JSON.parse(countryData);
         var deliveryCountries = [];
 
         if (countryList == null)
@@ -20,8 +20,14 @@ module.exports = (function($)
 
         for (var key in countryList)
         {
-            var country     = countryList[key];
-            var option      = {id: country.id, name: country.name, locale: country.isoCode2, selected: false};
+            var country = countryList[key];
+            var option = {
+                id      : country.id,
+                name    : country.name,
+                locale  : country.isoCode2,
+                selected: false
+            };
+
             option.selected = (id === country.id);
             deliveryCountries.push(option);
         }
@@ -40,9 +46,11 @@ module.exports = (function($)
         for (var id in countryNames)
         {
             var name = countryNames[id];
+
             for (var i = 0, len = countries.length; i < len; i++)
             {
                 var country = countries[i];
+
                 if (country.id == id)
                 {
                     country.name = name;
@@ -71,11 +79,13 @@ module.exports = (function($)
     function parseShippingStates(countryData, countryID)
     {
 
-        var states      = [];
+        var states = [];
         var countryList = JSON.parse(countryData);
+
         for (var key in countryList)
         {
             var country = countryList[key];
+
             if (country.id == countryID)
             {
                 states = country.states;

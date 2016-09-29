@@ -65,12 +65,14 @@ Vue.component("item-list-sort", {
         currentURL: function()
         {
             var url = window.location.href.split("?")[0];
+
             return url;
         },
 
         showPagination: function()
         {
             var show = this.paginationPosition != "infinityScroll";
+
             return show;
         },
 
@@ -85,55 +87,107 @@ Vue.component("item-list-sort", {
 
             if (this.topCell == true)
             {
-                defaultSortingOptions.push({value: "top_cell", selected: "top_cell" == this.defaultSorting, name: "Top Seller"});
+                defaultSortingOptions.push({
+                    value   : "top_cell",
+                    selected: this.defaultSorting == "top_cell",
+                    name    : "Top Seller"
+                });
             }
             if (this.itemAsc == true)
             {
-                defaultSortingOptions.push({value: "item_asc", selected: "item_asc" == this.defaultSorting, name: "Positionsnummer aufsteigend"});
+                defaultSortingOptions.push({
+                    value   : "item_asc",
+                    selected: this.defaultSorting == "item_asc",
+                    name    : "Positionsnummer aufsteigend"
+                });
             }
             if (this.itemDesc == true)
             {
-                defaultSortingOptions.push({value: "item_desc", selected: "item_desc" == this.defaultSorting, name: "Positionsnummer absteigend"});
+                defaultSortingOptions.push({
+                    value   : "item_desc",
+                    selected: this.defaultSorting == "item_desc",
+                    name    : "Positionsnummer absteigend"
+                });
             }
             if (this.nameAsc == true)
             {
-                defaultSortingOptions.push({value: "name_asc", selected: "name_asc" == this.defaultSorting, name: "Name aufsteigend"});
+                defaultSortingOptions.push({
+                    value   : "name_asc",
+                    selected: this.defaultSorting == "name_asc",
+                    name    : "Name aufsteigend"
+                });
             }
             if (this.nameDesc == true)
             {
-                defaultSortingOptions.push({value: "name_desc", selected: "name_desc" == this.defaultSorting, name: "Name absteigend"});
+                defaultSortingOptions.push({
+                    value   : "name_desc",
+                    selected: this.defaultSorting == "name_desc",
+                    name    : "Name absteigend"
+                });
             }
             if (this.priceAsc == true)
             {
-                defaultSortingOptions.push({value: "price_asc", selected: "price_asc" == this.defaultSorting, name: "Preis aufsteigend"});
+                defaultSortingOptions.push({
+                    value   : "price_asc",
+                    selected: this.defaultSorting == "price_asc",
+                    name    : "Preis aufsteigend"
+                });
             }
             if (this.priceDesc == true)
             {
-                defaultSortingOptions.push({value: "price_desc", selected: "price_desc" == this.defaultSorting, name: "Preis absteigend"});
+                defaultSortingOptions.push({
+                    value   : "price_desc",
+                    selected: this.defaultSorting == "price_desc",
+                    name    : "Preis absteigend"
+                });
             }
             if (this.releaseAsc == true)
             {
-                defaultSortingOptions.push({value: "release_asc", selected: "release_asc" == this.defaultSorting, name: "Erscheinungsdatum aufsteigend"});
+                defaultSortingOptions.push({
+                    value   : "release_asc",
+                    selected: this.defaultSorting == "release_asc",
+                    name    : "Erscheinungsdatum aufsteigend"
+                });
             }
             if (this.releaseDesc == true)
             {
-                defaultSortingOptions.push({value: "release_desc", selected: "release_desc" == this.defaultSorting, name: "Erscheinungsdatum absteigend"});
+                defaultSortingOptions.push({
+                    value   : "release_desc",
+                    selected: this.defaultSorting == "release_desc",
+                    name    : "Erscheinungsdatum absteigend"
+                });
             }
             if (this.storeSpecialAsc == true)
             {
-                defaultSortingOptions.push({value: "store_special_asc", selected: "store_special_asc" == this.defaultSorting, name: "Shopaktion aufsteigend"});
+                defaultSortingOptions.push({
+                    value   : "store_special_asc",
+                    selected: this.defaultSorting == "store_special_asc",
+                    name    : "Shopaktion aufsteigend"
+                });
             }
             if (this.storeSpecialDesc == true)
             {
-                defaultSortingOptions.push({value: "store_special_desc", selected: "store_special_desc" == this.defaultSorting, name: "Shopaktion absteigend"});
+                defaultSortingOptions.push({
+                    value   : "store_special_desc",
+                    selected: this.defaultSorting == "store_special_desc",
+                    name    : "Shopaktion absteigend"
+                });
             }
             if (this.idDesc == true)
             {
-                defaultSortingOptions.push({value: "id_desc", selected: "id_desc" == this.defaultSorting, name: "Artikel ID aufsteigend"});
+                defaultSortingOptions.push({
+                    value   : "id_desc",
+                    selected: this.defaultSorting == "id_desc",
+                    name    : "Artikel ID aufsteigend"
+                });
             }
             if (this.random == true)
             {
-                defaultSortingOptions.push({value: "random", selected: "random" == this.defaultSorting, name: "Zufällige Sortierung"});
+                defaultSortingOptions.push({
+                    value   : "random",
+                    selected: this.defaultSorting == "random",
+                    name    : "Zufällige Sortierung"
+                });
             }
 
             return defaultSortingOptions;
@@ -143,9 +197,18 @@ Vue.component("item-list-sort", {
         {
             var defaultItemPerPageOptions = [];
 
-            defaultItemPerPageOptions.push({value: 20, selected: 20 == this.defaultItemPerPage});
-            defaultItemPerPageOptions.push({value: 50, selected: 50 == this.defaultItemPerPage});
-            defaultItemPerPageOptions.push({value: 100, selected: 100 == this.defaultItemPerPage});
+            defaultItemPerPageOptions.push({
+                value   : 20,
+                selected: this.defaultItemPerPage == 20
+            });
+            defaultItemPerPageOptions.push({
+                value   : 50,
+                selected: this.defaultItemPerPage == 50
+            });
+            defaultItemPerPageOptions.push({
+                value   : 100,
+                selected: this.defaultItemPerPage == 100
+            });
 
             return defaultItemPerPageOptions;
         }
@@ -155,7 +218,7 @@ Vue.component("item-list-sort", {
     {
         this.initPropsValues();
 
-        var itemSorting      = this.getQueryStringValue("itemSorting");
+        var itemSorting = this.getQueryStringValue("itemSorting");
         var listItemsPerPage = this.getQueryStringValue("items_per_page");
 
         if (itemSorting.length > 0)

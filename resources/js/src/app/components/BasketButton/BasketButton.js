@@ -6,11 +6,13 @@ Vue.component("basket-button", {
     activate: function(done)
     {
         var self = this;
+
         BasketService.watch(function(data)
         {
             self.$set("basket", data.basket);
         });
-        BasketService.init(jQuery.parseJSON(this.basketData))
+        BasketService
+            .init(jQuery.parseJSON(this.basketData))
             .done(function()
             {
                 done();

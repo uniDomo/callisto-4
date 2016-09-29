@@ -22,7 +22,7 @@ Vue.component("item-list-pagination", {
 
     ready: function()
     {
-        var url                     = window.location.href;
+        var url = window.location.href;
 
         this.currentPaginationEntry = this.getQueryStringValue("page");
         this.currentURL = url.replace("&page=" + this.currentPaginationEntry, "");
@@ -47,7 +47,7 @@ Vue.component("item-list-pagination", {
 
         calculateMaxPages: function()
         {
-            var pages        = (this.maxCount / PaginationService.itemsPerPage);
+            var pages = (this.maxCount / PaginationService.itemsPerPage);
             var roundedPages = pages.toString().split(".");
 
             if (roundedPages[1] > 0)

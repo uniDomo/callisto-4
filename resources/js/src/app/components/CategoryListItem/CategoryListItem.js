@@ -16,6 +16,7 @@ Vue.component("category-list-item", {
         addToBasket: function()
         {
             var addItemModal = ModalService.findModal(this.$el);
+
             addItemModal.setTimeout(10000);
 
             $(".wrapper-bottom").append(addItemModal.getModalContainer());

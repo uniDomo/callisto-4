@@ -9,12 +9,9 @@ Vue.component("delete-from-basket", {
     ],
 
     methods: {
-
         deleteItem: function()
         {
             BasketService.deleteBasketItem(this.basketItem);
         }
-
     }
-
 });

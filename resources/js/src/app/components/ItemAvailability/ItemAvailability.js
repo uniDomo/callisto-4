@@ -29,5 +29,4 @@ Vue.component("item-availability-text", {
             }
         }
     }
-
 });

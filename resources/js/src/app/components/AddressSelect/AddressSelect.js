@@ -93,6 +93,7 @@ Vue.component("address-select", {
         updateHeadline: function()
         {
             var headline  = (this.addressType == "2") ? " Lieferadresse" : " Rechnungsadresse";
+
             headline += (this.modalType == "update") ? " bearbeiten" : " anlegen";
             this.headline = headline;
         }

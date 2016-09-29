@@ -2,7 +2,6 @@ var ApiService = require("services/ApiService");
 
 module.exports = (function($)
 {
-
     var checkout = {};
     var initPromise;
 
@@ -49,6 +48,7 @@ module.exports = (function($)
     function setCheckout(checkoutData)
     {
         var properties = Object.keys(checkoutData);
+
         for (var i = 0; i < properties.length; i++)
         {
             checkout[properties[i]] = checkoutData[properties[i]];

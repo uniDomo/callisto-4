@@ -11,6 +11,7 @@ Vue.component("basket-total-sum", {
     activate: function(done)
     {
         var self = this;
+
         BasketService.watch(function(data)
         {
             self.$set("basket", data.basket);
@@ -36,5 +37,4 @@ Vue.component("basket-total-sum", {
             return MonetaryFormatService.formatMonetary(price, currency);
         }
     }
-
 });

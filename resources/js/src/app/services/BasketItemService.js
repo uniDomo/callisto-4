@@ -24,6 +24,7 @@ module.exports = (function($)
     {
         var count       = 0;
         var basketItems = BasketItemService.basketItems;
+
         for (var i = 0; i < basketItems.length; i++)
         {
             count += basketItems[i].quantity;

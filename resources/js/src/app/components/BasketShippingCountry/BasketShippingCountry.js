@@ -1,4 +1,4 @@
-var BasketService  = require("services/BasketService");
+var BasketService = require("services/BasketService");
 var CountryService = require("services/CountryService");
 
 Vue.component("basket-shipping-country", {
@@ -21,7 +21,8 @@ Vue.component("basket-shipping-country", {
     methods: {
         updateShippingCountry: function()
         {
-            var basket               = BasketService.getBasket().basket;
+            var basket = BasketService.getBasket().basket;
+
             basket.shippingCountryId = this.select.id;
             console.log("updateShippingCountry", JSON.stringify(this.select));
             BasketService.updateShippingCountry(basket);
@@ -30,9 +31,11 @@ Vue.component("basket-shipping-country", {
         initSelected: function()
         {
             var nothingSelected = true;
+
             for (var key in this.countryList)
             {
                 var country = countryList[key];
+
                 if (country.selected)
                 {
                     this.select = country;
@@ -47,10 +50,10 @@ Vue.component("basket-shipping-country", {
             }
         }
     },
-    ready: function()
+    ready  : function()
     {
+        var shippingId = BasketService.getBasket().basket.shippingCountryId;
 
-        var shippingId         = BasketService.getBasket().basket.shippingCountryId;
         this.shippingCountries = CountryService.parseShippingCountries(this.countryData, shippingId);
         this.initSelected();
         CountryService.translateCountryNames(this.countryNameData, this.shippingCountries);

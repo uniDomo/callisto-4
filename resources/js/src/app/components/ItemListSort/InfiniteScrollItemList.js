@@ -5,8 +5,10 @@ Vue.component("infinite-scroll-item-list", {
 
     props: {
         infiniteConfig: {
-            limit     : 20,           // count of items to load.
-            offset    : 0,           // amount of items we want to skip on following call.
+            // count of items to load.
+            limit     : 20,
+            // amount of items we want to skip on following call.
+            offset    : 0,
             isLastPage: false
         }
     },
@@ -18,7 +20,8 @@ Vue.component("infinite-scroll-item-list", {
     data: function()
     {
         return {
-            isBusy: false      // if infinite scroll is busy, load event is disabled.
+            // if infinite scroll is busy, load event is disabled.
+            isBusy: false
         };
     },
 
@@ -31,11 +34,12 @@ Vue.component("infinite-scroll-item-list", {
                 offset: self.infiniteConfig.offset,
                 page  : self.infiniteConfig.offset / self.infiniteConfig.limit
             };
+
             self.isBusy = true;
 
             if (!self.isLastPage)
             {
-                LoadItemsService().loadItems(categoryID, data, this.$el, function(response)
+                LoadItemsService.loadItems(categoryID, data, this.$el, function(response)
                 {
                     if (response.data)
                     {
@@ -81,7 +85,6 @@ Vue.component("infinite-scroll-item-list", {
             var isGridView = $(this.$el).hasClass("grid");
             var newNode;
             var item;
-            var att;
 
             for (var i = 0, length = itemList.length; i < length; i++)
             {

@@ -42,7 +42,6 @@ module.exports = (function($)
             overlay.count = 0;
             overlay.visible = false;
         }
-
     }
 
 })(jQuery);

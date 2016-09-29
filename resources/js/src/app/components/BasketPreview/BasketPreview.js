@@ -1,12 +1,12 @@
 var BasketService         = require("services/BasketService");
 var MonetaryFormatService = require("services/MonetaryFormatService");
-var ModalService          = require("services/ModalService");
 
 vueApp.component("basket-preview", {
 
     activate: function(done)
     {
         var self = this;
+
         BasketService.watch(function(data)
         {
             self.$set("basket", data.basket);
@@ -40,14 +40,17 @@ vueApp.component("basket-preview", {
         {
             return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
         },
+
         basketTotalSum  : function()
         {
             return MonetaryFormatService.formatMonetary(this.basket.basketAmount, "EUR");
         },
+
         shippingTotalSum: function()
         {
             return MonetaryFormatService.formatMonetary(this.basket.shippingAmount, "EUR");
         },
+
         checkBasket     : function()
         {
             if (this.basketItems.length > 0)

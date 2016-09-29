@@ -1,7 +1,7 @@
-var BasketService       = require("services/BasketService");
-var ApiService          = require("services/ApiService");
+var BasketService = require("services/BasketService");
+var ApiService = require("services/ApiService");
 var NotificationService = require("services/NotificationService");
-var ModalService        = require("services/ModalService");
+var ModalService = require("services/ModalService");
 
 Vue.component("add-to-basket", {
 
@@ -24,6 +24,7 @@ Vue.component("add-to-basket", {
         addToBasket: function(quantity)
         {
             var addItemModal = ModalService.findModal($(this.$el.parentElement));
+
             addItemModal.setTimeout(10000);
 
             $(".wrapper-bottom").append(addItemModal.getModalContainer());

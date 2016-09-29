@@ -1,6 +1,5 @@
 var BasketService         = require("services/BasketService");
 var MonetaryFormatService = require("services/MonetaryFormatService");
-var ModalService          = require("services/ModalService");
 
 Vue.component("basket-item-list", {
 
@@ -22,6 +21,7 @@ Vue.component("basket-item-list", {
     activate: function(done)
     {
         var self = this;
+
         BasketService.watch(function(data)
         {
             self.$set("basket", data.basket);

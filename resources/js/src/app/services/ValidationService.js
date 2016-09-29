@@ -49,6 +49,7 @@ module.exports = (function($)
         $(fields).each(function(i, elem)
         {
             var $elem = $(elem);
+
             $elem.addClass(errorClass);
             _findFormControls($elem).on("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass", function()
             {
@@ -58,6 +59,7 @@ module.exports = (function($)
                     if ($elem.is("[type=\"radio\"], [type=\"checkbox\"]"))
                     {
                         var groupName = $elem.attr("name");
+
                         $("." + errorClass + "[name=\"" + groupName + "\"]").removeClass(errorClass);
                     }
                     _findFormControls($elem).off("click.removeErrorClass keyup.removeErrorClass change.removeErrorClass");

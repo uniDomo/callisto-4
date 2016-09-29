@@ -97,6 +97,7 @@ module.exports = (function($)
                 if (!paused)
                 {
                     var secondsRemaining = timeRemaining - (new Date()).getTime() + timeStart;
+
                     secondsRemaining = Math.round(secondsRemaining / 1000);
                     $bsModal.find(".timer").text(secondsRemaining);
                 }
