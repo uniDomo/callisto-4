@@ -54,12 +54,12 @@
       "never"
     ],
     "complexity"              : [
-      "error",
-      3
+      "warn",
+      5
     ],
     "consistent-return"       : "error",
     "default-case"            : "warn",
-    "eqeqeq"                  : "error",
+    "eqeqeq"                  : "warn",
     "func-call-spacing"       : [
       "error",
       "never"
@@ -69,23 +69,30 @@
       {
         "min": 2,
         "max": 30,
-        "exceptions": ["$"]
+        "exceptions": ["$", "i", "j"]
       }
     ],
     "indent"                  : [
       "error",
       4
     ],
+    "quotes" : ["error", "double"],
     "jsx-quotes"              : [
       "error",
       "prefer-double"
     ],
-    "key-spacing"             : [
-      "error",
-      {
-        "align": "colon"
+    "key-spacing"             : ["error", {
+      "multiLine": {
+        "beforeColon": true,
+        "afterColon": true
+
+      },
+      "align": {
+        "beforeColon": true,
+        "afterColon": true,
+        "on": "colon"
       }
-    ],
+    }],
     "keyword-spacing"         : [
       "error",
       {
@@ -103,7 +110,7 @@
     "no-eq-null"              : "error",
     "no-global-assign"        : "warn",
     "no-implicit-coercion"    : [
-      "error",
+      "off",
       {
         "boolean": true,
         "number" : true,
