@@ -1,14 +1,14 @@
-var BasketService         = require('services/BasketService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
+var BasketService         = require("services/BasketService");
+var MonetaryFormatService = require("services/MonetaryFormatService");
 
-Vue.component('basket-button', {
+Vue.component("basket-button", {
 
     activate: function(done)
     {
         var self = this;
         BasketService.watch(function(data)
         {
-            self.$set('basket', data.basket);
+            self.$set("basket", data.basket);
         });
         BasketService.init(jQuery.parseJSON(this.basketData))
             .done(function()
@@ -17,7 +17,7 @@ Vue.component('basket-button', {
             });
     },
 
-    template: '#vue-basket-button',
+    template: "#vue-basket-button",
 
     props: [
         "basketData"

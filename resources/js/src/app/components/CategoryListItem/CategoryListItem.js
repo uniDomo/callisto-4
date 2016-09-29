@@ -1,10 +1,10 @@
-var BasketService       = require('services/BasketService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
+var BasketService       = require("services/BasketService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
 
-Vue.component('category-list-item', {
+Vue.component("category-list-item", {
 
-    template: '#vue-category-list-item',
+    template: "#vue-category-list-item",
 
     props: [
         "item",
@@ -27,11 +27,11 @@ Vue.component('category-list-item', {
                 .done(function()
                 {
                     addItemModal.show();
-                    NotificationService.success('Der Artikel wurde erfolgreich in den Warenkorb gelegt').closeAfter(7000);
+                    NotificationService.success("Der Artikel wurde erfolgreich in den Warenkorb gelegt").closeAfter(7000);
                 })
                 .fail(function()
                 {
-                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(7000);
+                    NotificationService.error("Der Artikel konnte leider nicht hinzugefügt werden").closeAfter(7000);
                 });
         },
 
@@ -39,7 +39,7 @@ Vue.component('category-list-item', {
         {
             for (var i = 0; i < this.item.variationImageList.length; i++)
             {
-                if (this.item.variationImageList[i].path !== '')
+                if (this.item.variationImageList[i].path !== "")
                 {
                     return this.baseUrl + "/" + this.item.variationImageList[i].path;
                 }
@@ -49,7 +49,7 @@ Vue.component('category-list-item', {
 
         checkName: function(name)
         {
-            if (name !== '')
+            if (name !== "")
             {
                 return name + " " + this.item.variationBase.variationName;
             }

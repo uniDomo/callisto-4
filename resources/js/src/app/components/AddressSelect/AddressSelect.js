@@ -1,13 +1,13 @@
-var ModalService = require('services/ModalService');
+var ModalService = require("services/ModalService");
 
-Vue.component('address-select', {
+Vue.component("address-select", {
 
-    template: '#vue-address-select',
+    template: "#vue-address-select",
 
     props: [
-        'addressList',
-        'addressType',
-        'selectedAddressId'
+        "addressList",
+        "addressType",
+        "selectedAddressId"
     ],
 
     data: function()
@@ -52,7 +52,7 @@ Vue.component('address-select', {
         {
             this.selectedAddress = this.addressList[index];
 
-            this.$dispatch('address-changed', this.selectedAddress);
+            this.$dispatch("address-changed", this.selectedAddress);
         },
 
         isAddressListEmpty: function()
@@ -67,7 +67,7 @@ Vue.component('address-select', {
 
         showAdd: function()
         {
-            this.modalType     = "create";
+            this.modalType = "create";
             this.addressToEdit = {};
             this.updateHeadline();
 
@@ -77,7 +77,7 @@ Vue.component('address-select', {
 
         showEdit: function(address)
         {
-            this.modalType     = "update";
+            this.modalType = "update";
             this.addressToEdit = address;
             this.updateHeadline();
 

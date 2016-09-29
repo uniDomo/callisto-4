@@ -64,20 +64,28 @@
       "error",
       "never"
     ],
-    "max-len" : "off",
+    "max-len"                 : "off",
     "id-length"               : [
       "error",
       {
-        "min": 2,
-        "max": 30,
-        "exceptions": ["$", "i", "j"] // ignore jQuerys $ and loop indices
+        "min"       : 2,
+        "max"       : 30,
+        "exceptions": [
+          "$",
+          "i",
+          "j"
+        ]
+        // ignore jQuerys $ and loop indices
       }
     ],
     "indent"                  : [
       "error",
       4
     ],
-    "quotes" : ["error", "double"],
+    "quotes"                  : [
+      "error",
+      "double"
+    ],
     "jsx-quotes"              : [
       "error",
       "prefer-double"
@@ -107,7 +115,12 @@
         "string" : false
       }
     ],
-    "no-trailing-spaces": ["error", { "skipBlankLines": false }],
+    "no-trailing-spaces"      : [
+      "error",
+      {
+        "skipBlankLines": false
+      }
+    ],
     "no-multi-spaces"         : [
       "error",
       {
@@ -123,6 +136,7 @@
     "valid-jsdoc"             : "warn",
     "guard-for-in"            : "off",
     "padded-blocks"           : "off",
-    "no-warning-comments"     : "off"
+    "no-warning-comments"     : "off",
+    "no-negated-condition"    : "off"
   }
 }

@@ -1,5 +1,5 @@
-var PaginationService = require('services/PaginationService');
-var LoadItemsService  = require('services/LoadItemsService');
+var PaginationService = require("services/PaginationService");
+var LoadItemsService  = require("services/LoadItemsService");
 
 Vue.component("infinite-scroll-item-list", {
 
@@ -12,7 +12,7 @@ Vue.component("infinite-scroll-item-list", {
     },
 
     directives: {
-        'infinite-scroll': require('vue-infinite-scroll').infiniteScroll
+        "infinite-scroll": require("vue-infinite-scroll").infiniteScroll
     },
 
     data: function()
@@ -44,7 +44,7 @@ Vue.component("infinite-scroll-item-list", {
 
                     if (response.isLastPage || response.entries.length <= 0)
                     {
-                        self.isBusy     = true;
+                        self.isBusy = true;
                         self.isLastPage = response.isLastPage;
                         // TODO remove log and add "All elements loaded" event
                         console.log("All items loaded. No more items to get.");
@@ -85,10 +85,10 @@ Vue.component("infinite-scroll-item-list", {
 
             for (var i = 0, length = itemList.length; i < length; i++)
             {
-                item              = itemList[i];
-                newNode           = document.createElement('li');
-                newNode.innerHTML = '<category-list-item :item=\'' + JSON.stringify(item) + '\' base-url=""></category-list-item>';
-                newNode           = el.appendChild(newNode);
+                item = itemList[i];
+                newNode = document.createElement("li");
+                newNode.innerHTML = "<category-list-item :item='" + JSON.stringify(item) + "' base-url=\"\"></category-list-item>";
+                newNode = el.appendChild(newNode);
 
                 // compile new added (directive) element
                 this.$compile(newNode);

@@ -1,7 +1,7 @@
-var BasketService         = require('services/BasketService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
+var BasketService         = require("services/BasketService");
+var MonetaryFormatService = require("services/MonetaryFormatService");
 
-Vue.component('basket-total-sum', {
+Vue.component("basket-total-sum", {
 
     props: [
         "basketData",
@@ -13,7 +13,7 @@ Vue.component('basket-total-sum', {
         var self = this;
         BasketService.watch(function(data)
         {
-            self.$set('basket', data.basket);
+            self.$set("basket", data.basket);
         });
         BasketService.init(jQuery.parseJSON(this.basketData)).done(function()
         {
@@ -21,7 +21,7 @@ Vue.component('basket-total-sum', {
         });
     },
 
-    template: '#vue-basket-total-sum',
+    template: "#vue-basket-total-sum",
 
     data: function()
     {

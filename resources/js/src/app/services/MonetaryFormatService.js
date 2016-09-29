@@ -15,12 +15,12 @@ module.exports = (function($)
 
     function initOptions(number_decimals, separator_decimal, separator_thousands, right, currency)
     {
-        var getSymbolFromCurrency = require('currency-symbol-map').getSymbolFromCurrency;
+        var getSymbolFromCurrency = require("currency-symbol-map").getSymbolFromCurrency;
         var symbol                = getSymbolFromCurrency(currency);
 
         if (right == "true")
         {
-            right  = true;
+            right = true;
             symbol = " " + symbol;
         }
         else

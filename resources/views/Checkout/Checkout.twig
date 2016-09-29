@@ -2,7 +2,7 @@
 
 {% block PageBody %}
 
-    <user-login-watcher user-logged-in="false" route="/login" is-user-logged-in="{{ frontend.Account.getIsAccountLoggedIn | json_encode() }}"></user-login-watcher>
+    <user-login-watcher :user-logged-in="false" route="/login" :is-user-logged-in="{{ frontend.Account.getIsAccountLoggedIn | json_encode() }}"></user-login-watcher>
 
     {% if frontend.Account.getIsAccountLoggedIn %}
         <div class="checkout container">

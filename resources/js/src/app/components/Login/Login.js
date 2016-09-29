@@ -1,10 +1,10 @@
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
 
-Vue.component('login', {
+Vue.component("login", {
 
-        template: '#vue-login',
+    template: "#vue-login",
 
     props: [
         "modalElement"
@@ -33,7 +33,7 @@ Vue.component('login', {
                 {
                     ApiService.setToken(response);
 
-                    if (document.getElementById(component.modalElement) != null)
+                    if (document.getElementById(component.modalElement))
                     {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
@@ -44,9 +44,9 @@ Vue.component('login', {
                 {
                     switch (response.code)
                     {
-                        case 401:
-                            NotificationService.error("Anmeldedaten sind ungültig").closeAfter(3000);
-                            break;
+                    case 401:
+                        NotificationService.error("Anmeldedaten sind ungültig").closeAfter(3000);
+                        break;
                     }
                 });
         }

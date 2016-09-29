@@ -1,10 +1,10 @@
-var BasketService         = require('services/BasketService');
-var ApiService            = require('services/ApiService');
-var NotificationService   = require('services/NotificationService');
-var ModalService          = require('services/ModalService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
+var BasketService         = require("services/BasketService");
+var ApiService            = require("services/ApiService");
+var NotificationService   = require("services/NotificationService");
+var ModalService          = require("services/ModalService");
+var MonetaryFormatService = require("services/MonetaryFormatService");
 
-Vue.component('add-item-confirm', {
+Vue.component("add-item-confirm", {
 
     props: [
         "basketItem",
@@ -12,17 +12,17 @@ Vue.component('add-item-confirm', {
         "quantity"
     ],
 
-    template: '#vue-add-item-confirm',
+    template: "#vue-add-item-confirm",
 
     methods: {
 
         getImage: function()
         {
-            var path = '';
+            var path = "";
 
             for (var i = 0; i < this.basketItem.variationImageList.length; i++)
             {
-                if (this.basketItem.variationImageList[i].path !== '')
+                if (this.basketItem.variationImageList[i].path !== "")
                 {
                     path = this.basketItem.variationImageList[i].path;
                 }

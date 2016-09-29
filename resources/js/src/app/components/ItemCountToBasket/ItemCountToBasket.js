@@ -1,12 +1,12 @@
-var BasketService = require('services/BasketService');
+var BasketService = require("services/BasketService");
 
-Vue.component('item-count-to-basket', {
+Vue.component("item-count-to-basket", {
 
-    template: '#vue-item-count-to-basket',
+    template: "#vue-item-count-to-basket",
 
     props: [
-        'basketItem',
-        'quantity'
+        "basketItem",
+        "quantity"
     ],
 
     methods: {

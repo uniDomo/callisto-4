@@ -1,11 +1,11 @@
-var BasketService       = require('services/BasketService');
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
+var BasketService       = require("services/BasketService");
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
 
-Vue.component('add-to-basket', {
+Vue.component("add-to-basket", {
 
-    template: '#vue-add-to-basket',
+    template: "#vue-add-to-basket",
 
     props: [
         "basketItem",
@@ -37,7 +37,7 @@ Vue.component('add-to-basket', {
             })
                 .fail(function()
                 {
-                    NotificationService.error('Der Artikel konnte leider nicht hinzugefügt werden').closeAfter(10000);
+                    NotificationService.error("Der Artikel konnte leider nicht hinzugefügt werden").closeAfter(10000);
                 });
         },
 

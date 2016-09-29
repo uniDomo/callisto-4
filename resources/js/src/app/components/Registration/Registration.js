@@ -1,12 +1,11 @@
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var ModalService        = require('services/ModalService');
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var ModalService        = require("services/ModalService");
+var ValidationService   = require("services/ValidationService");
 
-var ValidationService = require('services/ValidationService');
+Vue.component("registration", {
 
-Vue.component('registration', {
-
-    template: '#vue-registration',
+    template: "#vue-registration",
 
     props: [
         "modalElement",
@@ -24,26 +23,15 @@ Vue.component('registration', {
         };
     },
 
-    created: function()
-    {
-        if (this.guestMode == null || this.guestMode == "")
-        {
-            this.guestMode = false;
-        }
-        else
-        {
-            this.guestMode = true;
-        }
-    },
-
     methods: {
         validateRegistration: function()
         {
             var self = this;
-            ValidationService.validate($('#registration' + this._uid))
+
+            ValidationService.validate($("#registration" + this._uid))
                 .done(function()
                 {
-                    self.sendRegistration()
+                    self.sendRegistration();
                 })
                 .fail(function(invalidFields)
                 {
@@ -61,7 +49,7 @@ Vue.component('registration', {
                 {
                     ApiService.setToken(response);
 
-                    if (document.getElementById(component.modalElement) != null)
+                    if ($(component.modalElement).length >= 1)
                     {
                         ModalService.findModal(document.getElementById(component.modalElement)).hide();
                     }
@@ -73,43 +61,25 @@ Vue.component('registration', {
 
         getUserObject: function()
         {
-            // FIXME copy&paste-action? serious?
-            if (this.guestMode)
-            {
-                var userObject =
-                    {
-                        contact: {
-                            referrerId: 1,
-                            typeId    : 1,
-                            options   : {
-                                typeId: {
-                                    typeId   : 2,
-                                    subTypeId: 4,
-                                    value    : this.username,
-                                    priority : 0
-                                }
+            var userObject =
+                {
+                    contact: {
+                        referrerId: 1,
+                        typeId    : 1,
+                        options   : {
+                            typeId: {
+                                typeId   : 2,
+                                subTypeId: 4,
+                                value    : this.username,
+                                priority : 0
                             }
                         }
-                    };
-            }
-            else
+                    }
+                };
+
+            if (!this.guestMode)
             {
-                var userObject =
-                    {
-                        contact: {
-                            referrerId: 1,
-                            typeId    : 1,
-                            password  : this.password,
-                            options   : {
-                                typeId: {
-                                    typeId   : 2,
-                                    subTypeId: 4,
-                                    value    : this.username,
-                                    priority : 0
-                                }
-                            }
-                        }
-                    };
+                userObject.contact.password = this.password;
             }
 
             if (!this.isSimpleRegistration)

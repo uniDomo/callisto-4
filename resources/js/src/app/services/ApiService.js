@@ -1,5 +1,5 @@
-var NotificationService = require('services/NotificationService');
-var WaitScreenService   = require('services/WaitScreenService');
+var NotificationService = require("services/NotificationService");
+var WaitScreenService   = require("services/WaitScreenService");
 
 module.exports = (function($)
 {
@@ -31,10 +31,12 @@ module.exports = (function($)
             for (var i = 0; i < _eventListeners[event].length; i++)
             {
                 var listener = _eventListeners[event][i];
+
                 if (typeof listener != "function")
                 {
                     continue;
                 }
+
                 listener.call(null, payload);
             }
         }
@@ -42,29 +44,29 @@ module.exports = (function($)
 
     function _get(url, data, config)
     {
-        config        = config || {};
-        config.method = 'GET';
+        config = config || {};
+        config.method = "GET";
         return _send(url, data, config);
     }
 
     function _put(url, data, config)
     {
-        config        = config || {};
-        config.method = 'PUT';
+        config = config || {};
+        config.method = "PUT";
         return _send(url, data, config);
     }
 
     function _post(url, data, config)
     {
-        config        = config || {};
-        config.method = 'POST';
+        config = config || {};
+        config.method = "POST";
         return _send(url, data, config);
     }
 
     function _delete(url, data, config)
     {
-        config        = config || {};
-        config.method = 'DELETE';
+        config = config || {};
+        config.method = "DELETE";
         return _send(url, data, config);
     }
 
@@ -72,11 +74,11 @@ module.exports = (function($)
     {
         var deferred = $.Deferred();
 
-        config                      = config || {};
-        config.data                 = !!data ? JSON.stringify(data) : null;
-        config.dataType             = config.dataType || 'json';
-        config.contentType          = config.contentType || 'application/json';
-        config.doInBackground       = !!config.doInBackground;
+        config = config || {};
+        config.data = !!data ? JSON.stringify(data) : null;
+        config.dataType = config.dataType || "json";
+        config.contentType = config.contentType || "application/json";
+        config.doInBackground = !!config.doInBackground;
         config.supressNotifications = !!config.supressNotifications;
 
         if (!config.doInBackground)
@@ -141,7 +143,7 @@ module.exports = (function($)
 
         if (!!response.debug && response.debug.class.length > 0)
         {
-            notification.trace(response.debug.file + '(' + response.debug.line + '): ' + response.debug.class);
+            notification.trace(response.debug.file + "(" + response.debug.line + "): " + response.debug.class);
             for (var i = 0; i < response.debug.trace.length; i++)
             {
                 notification.trace(response.debug.trace[i]);

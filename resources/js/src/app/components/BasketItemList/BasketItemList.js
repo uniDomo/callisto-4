@@ -1,10 +1,10 @@
-var BasketService         = require('services/BasketService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
-var ModalService          = require('services/ModalService');
+var BasketService         = require("services/BasketService");
+var MonetaryFormatService = require("services/MonetaryFormatService");
+var ModalService          = require("services/ModalService");
 
-Vue.component('basket-item-list', {
+Vue.component("basket-item-list", {
 
-    template: '#vue-basket-item-list',
+    template: "#vue-basket-item-list",
 
     props: [
         "baseUrl"
@@ -24,9 +24,9 @@ Vue.component('basket-item-list', {
         var self = this;
         BasketService.watch(function(data)
         {
-            self.$set('basket', data.basket);
-            self.$set('basketItems', data.basketItems);
-            self.$set('items', data.items);
+            self.$set("basket", data.basket);
+            self.$set("basketItems", data.basketItems);
+            self.$set("items", data.items);
         });
         BasketService.init().done(function()
         {
@@ -35,14 +35,14 @@ Vue.component('basket-item-list', {
     },
 
     methods: {
-        deleteItem       : function(basketItem)
+        deleteItem: function(basketItem)
         {
-            $(".art-" + basketItem.variationId).toggleClass('wait');
+            $(".art-" + basketItem.variationId).toggleClass("wait");
 
             BasketService.deleteBasketItem(basketItem);
         },
 
-        calcPrice        : function(basketItem)
+        calcPrice: function(basketItem)
         {
             var currency = this.items[basketItem.variationId].variationRetailPrice.currency;
             var priceSum = basketItem.quantity * this.items[basketItem.variationId].variationRetailPrice.price;
@@ -58,9 +58,9 @@ Vue.component('basket-item-list', {
             return MonetaryFormatService.formatMonetary(retailPrice, currency);
         },
 
-        checkName        : function(basketItem, name)
+        checkName: function(basketItem, name)
         {
-            if (name !== '')
+            if (name !== "")
             {
                 return name + " " + this.items[basketItem.variationId].variationBase.variationName;
             }

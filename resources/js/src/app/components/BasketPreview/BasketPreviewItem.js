@@ -1,10 +1,10 @@
-var BasketService         = require('services/BasketService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
-var ModalService          = require('services/ModalService');
+var BasketService         = require("services/BasketService");
+var MonetaryFormatService = require("services/MonetaryFormatService");
+var ModalService          = require("services/ModalService");
 
-Vue.component('basket-preview-item', {
+Vue.component("basket-preview-item", {
 
-    template: '#vue-basket-preview-item',
+    template: "#vue-basket-preview-item",
 
     props: [
         "baseUrl"
@@ -24,9 +24,9 @@ Vue.component('basket-preview-item', {
         var self = this;
         BasketService.watch(function(data)
         {
-            self.$set('basket', data.basket);
-            self.$set('basketItems', data.basketItems);
-            self.$set('items', data.items);
+            self.$set("basket", data.basket);
+            self.$set("basketItems", data.basketItems);
+            self.$set("items", data.items);
         });
         BasketService.init().done(function()
         {
@@ -55,14 +55,14 @@ Vue.component('basket-preview-item', {
         {
             var _self = this;
 
-            if ($(event.currentTarget).hasClass('btn-link'))
+            if ($(event.currentTarget).hasClass("btn-link"))
             {
                 this.toggleDeleteBtnClass(event.currentTarget);
-                $(event.currentTarget).find('.message').text('Jetzt löschen');
+                $(event.currentTarget).find(".message").text("Jetzt löschen");
             }
             else
             {
-                $('.previewItem-' + basketItem.variationId).toggleClass('wait');
+                $(".previewItem-" + basketItem.variationId).toggleClass("wait");
 
                 BasketService.deleteBasketItem(basketItem);
             }
@@ -70,17 +70,17 @@ Vue.component('basket-preview-item', {
 
         toggleDeleteBtnClass: function(element)
         {
-            $(element).toggleClass('btn-link');
-            $(element).toggleClass('btn-danger');
+            $(element).toggleClass("btn-link");
+            $(element).toggleClass("btn-danger");
         },
 
         getImage: function(variationId)
         {
-            var path = '';
+            var path = "";
 
             for (var i = 0; i < this.items[variationId].variationImageList.length; i++)
             {
-                if (this.items[variationId].variationImageList[i].path !== '')
+                if (this.items[variationId].variationImageList[i].path !== "")
                 {
                     path = this.items[variationId].variationImageList[i].path;
                 }
@@ -95,19 +95,19 @@ Vue.component('basket-preview-item', {
             if (basketItem.quantity > 1 || value == 1)
             {
                 basketItem.quantity = basketItem.quantity + value;
-                $(this.$el.nextElementSibling).toggleClass('wait');
+                $(this.$el.nextElementSibling).toggleClass("wait");
 
                 BasketService.updateBasketItem(basketItem)
                     .done(function()
                     {
-                        $(_self.$el.nextElementSibling).toggleClass('wait');
+                        $(_self.$el.nextElementSibling).toggleClass("wait");
                     });
             }
         },
 
         checkName: function(variationId, name)
         {
-            if (name !== '')
+            if (name !== "")
             {
                 return name + " " + this.items[variationId].variationBase.variationName;
             }

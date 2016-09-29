@@ -1,7 +1,7 @@
-var ApiService          = require('services/ApiService');
-var NotificationService = require('services/NotificationService');
-var HTMLCache           = require('services/VariationsHTMLCacheService');
-var BasketService       = require('services/BasketService');
+var ApiService          = require("services/ApiService");
+var NotificationService = require("services/NotificationService");
+var HTMLCache           = require("services/VariationsHTMLCacheService");
+var BasketService       = require("services/BasketService");
 
 /**
  * possible preselection values:
@@ -9,17 +9,17 @@ var BasketService       = require('services/BasketService');
  * true
  * variantID
  */
-Vue.component('item-variation-select', {
+Vue.component("item-variation-select", {
 
-    template: '#vue-item-variation-select',
+    template: "#vue-item-variation-select",
 
-    props   : [
+    props: [
         "itemId",
         "preselection",
         "itemIsInBasket"
     ],
 
-    data    : function()
+    data: function()
     {
         return {
             variationAttributes     : {},
@@ -30,7 +30,7 @@ Vue.component('item-variation-select', {
         };
     },
 
-    created : function()
+    created: function()
     {
         this.oldVariationId = this.preselection;
         this.loadVariationAttributes();
@@ -43,7 +43,7 @@ Vue.component('item-variation-select', {
         var self = this;
         BasketService.watch(function(data)
         {
-            self.$set('basketItems', data.basketItems);
+            self.$set("basketItems", data.basketItems);
         });
         BasketService.init().done(function()
         {
@@ -51,7 +51,7 @@ Vue.component('item-variation-select', {
         });
     },
 
-    methods : {
+    methods: {
         loadVariationAttributes: function()
         {
             var self = this;
@@ -62,13 +62,13 @@ Vue.component('item-variation-select', {
                     // catch possible empty response
                     if (!response
                         || (response && response.data === null)
-                        || (response && response["selectionValues"].length === 0))
+                        || (response && response.selectionValues.length === 0))
                     {
                         return;
                     }
-                    self.variationAttributes = response["selectionValues"];
-                    self.variations          = response["variations"];
-                    self.attributeNames      = response["attributeNames"];
+                    self.variationAttributes = response.selectionValues;
+                    self.variations = response.variations;
+                    self.attributeNames = response.attributeNames;
 
                     var attributes          = Object.keys(self.variationAttributes);
                     var setOnInitialization = {};
@@ -81,7 +81,7 @@ Vue.component('item-variation-select', {
                     else
                     {
                         // if preselection is true, select first entries for all attributes
-                        if (typeof self.preselection === 'boolean')
+                        if (typeof self.preselection === "boolean")
                         {
                             for (var attribute in self.variationAttributes)
                             {
@@ -110,7 +110,7 @@ Vue.component('item-variation-select', {
                                     self.variantionSelectionModel.push({attributeId: null, attributeValueId: null});
                                 }
                                 // toString() is needed to initialize select element model. Doesn't work with integer.
-                                self.variantionSelectionModel[i].attributeId      = variationPreselected[i].attributeId.toString();
+                                self.variantionSelectionModel[i].attributeId = variationPreselected[i].attributeId.toString();
                                 self.variantionSelectionModel[i].attributeValueId = variationPreselected[i].attributeValueId.toString();
                             }
                         }
@@ -119,11 +119,11 @@ Vue.component('item-variation-select', {
 
                 }).fail(function(error)
             {
-                console.warn(error);
-                return false;
-            });
+                    console.warn(error);
+                    return false;
+                });
         },
-        matchVariation         : function(currentSelection)
+        matchVariation: function(currentSelection)
         {
             var hits = 0;
             var currentVariation;
@@ -158,7 +158,7 @@ Vue.component('item-variation-select', {
             }
             return hits;
         },
-        onSelectChange         : function()
+        onSelectChange: function()
         {
             var self                = this;
             var convertedAttributes = [];
@@ -206,7 +206,7 @@ Vue.component('item-variation-select', {
                     window.history.replaceState({id: this.oldVariationId, itemId: this.itemId, reload: "true"}, "testitem", "/test/" + this.itemId + "/" + this.oldVariationId);
                     window.history.pushState({id: matchingVariationId, itemId: this.itemId, reload: "true"}, "testitem", "/test/" + this.itemId + "/" + matchingVariationId);
 
-                    this.loadVariation(this.itemId, matchingVariationId)
+                    this.loadVariation(this.itemId, matchingVariationId);
                 }
             }
         },
@@ -222,7 +222,7 @@ Vue.component('item-variation-select', {
                     {
                         var found = $(response).find("#page-body");
                         $("#page-body").html(found);
-                        new Vue({el: 'body'});
+                        new Vue({el: "body"});
 
                         HTMLCache.addToCache(itemId, variationId, found);
                     };

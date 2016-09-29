@@ -1,9 +1,9 @@
-Vue.component('price-formatted', {
+Vue.component("price-formatted", {
 
-    template: '<span class="price-formatted">${ priceFormatted }</span>',
+    template: "<span class=\"price-formatted\">${ priceFormatted }</span>",
 
     props: [
-        'price'
+        "price"
     ],
 
     computed: {

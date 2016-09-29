@@ -1,19 +1,20 @@
-var ApiService      = require('services/ApiService');
-var CheckoutService = require('services/CheckoutService');
+var ApiService      = require("services/ApiService");
+var CheckoutService = require("services/CheckoutService");
 
 module.exports = (function($)
 {
 
     return {
         createAddress: createAddress,
-        updateAddress: updateAddress
+        updateAddress: updateAddress,
+        deleteAddress: deleteAddress
     };
 
     function createAddress(address, addressType, setActive)
     {
         return ApiService.post("rest/customer/address?typeId=" + addressType, address).done(function(response)
         {
-            if (!!setActive)
+            if (!setActive)
             {
                 if (addressType === 1)
                 {

@@ -1,24 +1,25 @@
-var BasketService         = require('services/BasketService');
-var MonetaryFormatService = require('services/MonetaryFormatService');
-var ModalService          = require('services/ModalService');
+var BasketService         = require("services/BasketService");
+var MonetaryFormatService = require("services/MonetaryFormatService");
+var ModalService          = require("services/ModalService");
 
-Vue.component('basket-preview', {
+vueApp.component("basket-preview", {
 
-    activate: function( done )
+    activate: function(done)
     {
         var self = this;
-        BasketService.watch(function( data ) {
-            self.$set( 'basket', data.basket );
-            self.$set( 'basketItems', data.basketItems );
-            self.$set( 'items', data.items );
+        BasketService.watch(function(data)
+        {
+            self.$set("basket", data.basket);
+            self.$set("basketItems", data.basketItems);
+            self.$set("items", data.items);
         });
-        BasketService.init( jQuery.parseJSON(this.basketData) ).done(function()
+        BasketService.init(jQuery.parseJSON(this.basketData)).done(function()
         {
             done();
         });
     },
 
-    template: '#vue-basket-preview',
+    template: "#vue-basket-preview",
 
     props: [
         "basketData",
@@ -28,50 +29,48 @@ Vue.component('basket-preview', {
     data: function()
     {
         return {
-            basket: {},
+            basket     : {},
             basketItems: [],
-            items: {}
+            items      : {}
         };
     },
 
-    computed:
-    {
-        itemTotalSum: function ()
+    computed: {
+        itemTotalSum    : function()
         {
-          return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
+            return MonetaryFormatService.formatMonetary(this.basket.itemSum, "EUR");
         },
-        basketTotalSum: function ()
+        basketTotalSum  : function()
         {
-          return MonetaryFormatService.formatMonetary(this.basket.basketAmount, "EUR");
+            return MonetaryFormatService.formatMonetary(this.basket.basketAmount, "EUR");
         },
-        shippingTotalSum: function ()
+        shippingTotalSum: function()
         {
-          return MonetaryFormatService.formatMonetary(this.basket.shippingAmount, "EUR");
+            return MonetaryFormatService.formatMonetary(this.basket.shippingAmount, "EUR");
         },
-        checkBasket: function ()
+        checkBasket     : function()
         {
-          if(this.basketItems.length > 0)
-          {
-            if($('.basketBtn').hasClass('disabled'))
+            if (this.basketItems.length > 0)
             {
-              this.toggleBtnClasses();
+                if ($(".basketBtn").hasClass("disabled"))
+                {
+                    this.toggleBtnClasses();
+                }
+                return true;
             }
-            return true;
-          }
-          else
-          {
-            this.toggleBtnClasses();
-            return false;
-          }
+            else
+            {
+                this.toggleBtnClasses();
+                return false;
+            }
         }
     },
 
-    methods:
-    {
-        toggleBtnClasses: function ()
+    methods: {
+        toggleBtnClasses: function()
         {
-          $('.basketBtn').toggleClass('disabled');
-          $('.checkOutBtn').toggleClass('disabled');
+            $(".basketBtn").toggleClass("disabled");
+            $(".checkOutBtn").toggleClass("disabled");
         }
     }
 });

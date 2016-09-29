@@ -1,10 +1,10 @@
-var MonetaryFormatService = require('services/MonetaryFormatService');
+var MonetaryFormatService = require("services/MonetaryFormatService");
 
-Vue.component('shipping-profile-select', {
+Vue.component("shipping-profile-select", {
 
-    template: '#vue-shipping-profile-select',
+    template: "#vue-shipping-profile-select",
 
-    props: ['shippingProfileData'],
+    props: ["shippingProfileData"],
 
     data: function()
     {
@@ -23,11 +23,11 @@ Vue.component('shipping-profile-select', {
         // }
 
         this.shippingProfileList =
-            [
+        [
                 {id: "1", name: "DHL", price: 3.99},
                 {id: "2", name: "Hermes", price: 2.99},
                 {id: "3", name: "UPS", price: 5}
-            ];
+        ];
 
         this.addEventListener();
     },
@@ -47,7 +47,7 @@ Vue.component('shipping-profile-select', {
 
         addEventListener: function()
         {
-            //listen on APIService events and handle new data
+            // listen on APIService events and handle new data
         }
     }
 });

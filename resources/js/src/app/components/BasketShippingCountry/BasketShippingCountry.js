@@ -1,9 +1,9 @@
-var BasketService  = require('services/BasketService');
-var CountryService = require('services/CountryService');
+var BasketService  = require("services/BasketService");
+var CountryService = require("services/CountryService");
 
-Vue.component('basket-shipping-country', {
+Vue.component("basket-shipping-country", {
 
-    template: '#vue-basket-shipping-country',
+    template: "#vue-basket-shipping-country",
 
     props: [
         "countryData",
@@ -15,7 +15,7 @@ Vue.component('basket-shipping-country', {
         return {
             shippingCountries: [],
             select           : {}
-        }
+        };
     },
 
     methods: {
@@ -35,7 +35,7 @@ Vue.component('basket-shipping-country', {
                 var country = countryList[key];
                 if (country.selected)
                 {
-                    this.select     = country;
+                    this.select = country;
                     nothingSelected = false;
                     break;
                 }
@@ -43,11 +43,11 @@ Vue.component('basket-shipping-country', {
             if (nothingSelected)
             {
                 this.shippingCountries[0].selected = true;
-                this.select                        = this.shippingCountries[0];
+                this.select = this.shippingCountries[0];
             }
         }
     },
-    ready  : function()
+    ready: function()
     {
 
         var shippingId         = BasketService.getBasket().basket.shippingCountryId;

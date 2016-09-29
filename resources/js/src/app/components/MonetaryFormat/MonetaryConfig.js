@@ -1,6 +1,6 @@
-var MonetaryFormatService = require('services/MonetaryFormatService');
+var MonetaryFormatService = require("services/MonetaryFormatService");
 
-Vue.component('monetary-config',
+Vue.component("monetary-config",
     {
         props: [
             "numberDecimals",

@@ -1,8 +1,8 @@
-var MonetaryFormatService = require('services/MonetaryFormatService');
+var MonetaryFormatService = require("services/MonetaryFormatService");
 
-Vue.component('monetary-format',
+Vue.component("monetary-format",
     {
-        template: '${ monetary }',
+        template: "${ monetary }",
 
         props: [
             "price",
@@ -13,6 +13,7 @@ Vue.component('monetary-format',
             start: function(done)
             {
                 var self = this;
+
                 setTimeout(function()
                 {
                     self.monetary = MonetaryFormatService.formatMonetary(this.price, this.currency);

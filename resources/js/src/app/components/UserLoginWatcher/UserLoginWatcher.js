@@ -1,30 +1,30 @@
-var NotificationService = require('services/NotificationService');
+var NotificationService = require("services/NotificationService");
 
-Vue.component('user-login-watcher', {
+Vue.component("user-login-watcher", {
 
-        props: [
-            "userLoggedIn",
-            "route",
-            "isUserLoggedIn"
-        ],
+    props: [
+        "userLoggedIn",
+        "route",
+        "isUserLoggedIn"
+    ],
 
-        ready: function()
+    ready: function()
+    {
+        if (this.route.length > 0)
         {
-            if (this.route.length > 0)
+            if (this.userLoggedIn === this.isUserLoggedIn)
             {
-                if (this.userLoggedIn == this.isUserLoggedIn)
+                if (this.userLoggedIn == "false")
                 {
-                    if (this.userLoggedIn == "false")
-                    {
-                        NotificationService.error("Bitte einloggen").closeAfter(3000);
-                    }
-                    else
-                    {
-                        NotificationService.error("Du bist bereits eingeloggt").closeAfter(3000);
-                    }
-
-                    window.location.pathname = this.route;
+                    NotificationService.error("Bitte einloggen").closeAfter(3000);
                 }
+                else
+                {
+                    NotificationService.error("Du bist bereits eingeloggt").closeAfter(3000);
+                }
+
+                window.location.pathname = this.route;
             }
         }
-    });
+    }
+});
