@@ -6,7 +6,7 @@ const OUTPUT_PREFIX = 'plugin-callisto';
 
 // import gulp
 var gulp = require('gulp');
-var gutil = require('gulp-util')
+var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var del = require('del');
@@ -19,6 +19,7 @@ var buffer = require('vinyl-buffer');
 var addSrc = require('gulp-add-src');
 var ignore = require('gulp-ignore');
 var minifyCSS = require('gulp-minify-css');
+var eslint = require('gulp-eslint');
 
 // import sass tools
 var sass = require('gulp-sass');
@@ -68,7 +69,7 @@ gulp.task('build:app', function() {
         .pipe( concat( OUTPUT_PREFIX + '-app.js') )
         .pipe( sourcemaps.write('.', {includeContent: false, sourceRoot: '../src'}) )
         .pipe( gulp.dest( JS_DIST ) );
-})
+});
 
 gulp.task('build:vendor', function() {
     var libraries = require(JS_SRC + 'vendor.json');
@@ -77,6 +78,23 @@ gulp.task('build:vendor', function() {
         .pipe( concat( OUTPUT_PREFIX + '-vendor.js' ) )
         .pipe( sourcemaps.write('.', {sourceRoot: '../src/libraries'}) )
         .pipe( gulp.dest( JS_DIST ) );
+});
+
+gulp.task('lint', function() {
+    // ESLint ignores files with "node_modules" paths.
+    // So, it's best to have gulp ignore the directory as well.
+    // Also, Be sure to return the stream from the task;
+    // Otherwise, the task may end before the stream has finished.
+    return gulp.src(['resources/js/src/**/*.js', '!node_modules/**'])
+        .pipe(eslint({
+            "configFile": "./.eslintrc.json",
+            "fix": true
+        }))
+        .pipe(gulp.dest("resources/js/src/"))
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format("table"))
+        .pipe(eslint.failAfterError());
 });
 
 gulp.task('build:sass-min', ['build:sass'], function() {
