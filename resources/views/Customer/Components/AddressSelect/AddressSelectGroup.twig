@@ -6,15 +6,15 @@
         <h3>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h3>
     </header>
     <div class="invoice-addresses-select">
-        <invoice-address-select :address-list="${ addressListInvoice }"
-                                :selected-address-id="${ selectedAddressIdInvoice }"></invoice-address-select>
+        <invoice-address-select :address-list="addressListInvoice"
+                                :selected-address-id="selectedAddressIdInvoice"></invoice-address-select>
     </div>
 
     <header class="m-b-1">
         <h3>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h3>
     </header>
     <div class="shipping-addresses-select">
-        <shipping-address-select :address-list="${ addressListShipping }"
-                                 :selected-address-id="${ selectedAddressIdShipping }"></shipping-address-select>
+        <shipping-address-select :address-list="addressListShipping"
+                                 :selected-address-id="selectedAddressIdShipping"></shipping-address-select>
     </div>
 </script>

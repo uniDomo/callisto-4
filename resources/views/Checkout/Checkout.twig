@@ -25,7 +25,7 @@
 
                     <address-select-group :address-list-invoice="{{ services.customer.getAddresses(1) | json_encode() }}"
                                           :selected-address-id-invoice="{{ services.checkout.getBillingAddressId() }}"
-                                          :address-list-shipping="{{ services.customer.getAddresses(2) | json_encode() }}"
+                                          :address-list-shipping="{{ services.customer.getAddresses(2) | json_encode}}"
                                           :selected-address-id-shipping="{{ services.checkout.getDeliveryAddressId() }}"></address-select-group>
 
                     <header class="m-b-1">

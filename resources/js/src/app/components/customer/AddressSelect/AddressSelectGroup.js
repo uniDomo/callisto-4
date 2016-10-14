@@ -12,11 +12,7 @@ Vue.component("address-select-group", {
     data: function()
     {
         return {
-            isDifferingShippingAddress: true,
-            addressListInvoice: this.addressListInvoice,
-            selectedAddressIdInvoice: this.selectedAddressIdInvoice,
-            addressListShipping: this.addressListShipping,
-            selectedAddressIdShipping: this.selectedAddressIdShipping
+            isDifferingShippingAddress: true
         };
     },
 
