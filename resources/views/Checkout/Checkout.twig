@@ -23,10 +23,10 @@
             <div class="col-md-7">
                 <div id="registry-form-container" class="registry-form-container main-col" data-id="0" data-status="2">
 
-                    <address-select-group :address-list-invoice="{{ services.customer.getAddresses(1) | json_encode() }}"
-                                          :selected-address-id-invoice="{{ services.checkout.getBillingAddressId() }}"
-                                          :address-list-shipping="{{ services.customer.getAddresses(2) | json_encode}}"
-                                          :selected-address-id-shipping="{{ services.checkout.getDeliveryAddressId() }}"></address-select-group>
+                    <address-select-group v-bind:address-list-invoice="{{ services.customer.getAddresses(1) | json_encode() }}"
+                                          v-bind:selected-address-id-invoice="{{ services.checkout.getBillingAddressId() }}"
+                                          v-bind:address-list-shipping="{{ services.customer.getAddresses(2) | json_encode}}"
+                                          v-bind:selected-address-id-shipping="{{ services.checkout.getDeliveryAddressId() }}"></address-select-group>
 
                     <header class="m-b-1">
                         <h3>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h3>
