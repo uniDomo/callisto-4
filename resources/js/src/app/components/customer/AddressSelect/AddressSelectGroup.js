@@ -17,13 +17,26 @@ Vue.component("address-select-group", {
             isDifferingShippingAddress: true,
             addressListShippingInit: {},
             selectedAddressIdShippingInit: "",
+            selectedAddressShippingInit: "",
+
+            addressModal: {},
 
             selectedAddressInvoice: {},
-            addressModalInvoice   : {},
+            // addressModalInvoice   : {},
             modalTypeInvoice      : "",
             headlineInvoice       : "",
             addressToEditInvoice  : {},
-            addressModalIdInvoice : ""
+            addressModalIdInvoice : "",
+
+            selectedAddressShipping: {},
+            // addressModalShipping   : {},
+            modalTypeShipping      : "",
+            headlineShipping       : "",
+            addressToEditShipping  : {},
+            addressModalIdShipping : "",
+
+            headline: "",
+            addressModalId: ""
         };
     },
 
@@ -32,7 +45,7 @@ Vue.component("address-select-group", {
      */
     created: function()
     {
-        if (!this.isAddressListEmpty())
+        if (!this.isAddressListEmptyInvoice())
         {
             for (var index in this.addressListInvoice)
             {
@@ -47,7 +60,23 @@ Vue.component("address-select-group", {
             this.addressListInvoice = [];
         }
 
-        this.addressModalIdInvoice = "addressModal" + this._uid;
+        if (!this.isAddressListEmptyShipping())
+        {
+            for (var index2 in this.addressListShipping)
+            {
+                if (this.addressListShipping[index2].id === this.selectedAddressIdShipping)
+                {
+                    this.selectedAddressShipping = this.addressListShipping[index2];
+                }
+            }
+        }
+        else
+        {
+            this.addressListShipping = [];
+        }
+
+        this.addressModalId = "addressModal" + this._uid;
+        // this.addressModalIdShipping = "addressModalShipping" + this._uid;
     },
 
     /**
@@ -55,7 +84,8 @@ Vue.component("address-select-group", {
      */
     ready: function()
     {
-        this.addressModalInvoice = ModalService.findModal(document.getElementById(this.addressModalIdInvoice));
+        this.addressModal = ModalService.findModal(document.getElementById(this.addressModalId));
+        // this.addressModalShipping = ModalService.findModal(document.getElementById(this.addressModalIdShipping));
     },
 
     methods:
@@ -66,22 +96,25 @@ Vue.component("address-select-group", {
             {
                 this.addressListShippingInit = this.addressListShipping;
                 this.selectedAddressIdShippingInit = this.selectedAddressIdShipping;
+                this.selectedAddressShippingInit = this.selectedAddressShipping;
 
                 this.addressListShipping = this.addressListInvoice;
                 this.selectedAddressIdShipping = this.selectedAddressIdInvoice;
+                this.selectedAddressShipping = this.selectedAddressInvoice;
             }
             else
             {
                 this.addressListShipping = this.addressListShippingInit;
                 this.selectedAddressIdInvoice = this.selectedAddressIdShippingInit;
+                this.selectedAddressShipping = this.selectedAddressShippingInit;
             }
         },
 
         /**
-         * Update the selected address
+         * Update the selected invoice address
          * @param index
          */
-        onAddressChanged: function(index)
+        onAddressChangedInvoice: function(index)
         {
             this.selectedAddressInvoice = this.addressListInvoice[index];
 
@@ -89,12 +122,32 @@ Vue.component("address-select-group", {
         },
 
         /**
-         * Check whether the address list is empty
+         * Update the selected shipping address
+         * @param index
+         */
+        onAddressChangedShipping: function(index)
+        {
+            this.selectedAddressShipping = this.addressListShipping[index];
+
+            this.$dispatch("address-changed-shipping", this.selectedAddressShipping);
+        },
+
+        /**
+         * Check whether the invoice address list is empty
          * @returns {boolean}
          */
-        isAddressListEmpty: function()
+        isAddressListEmptyInvoice: function()
         {
             return !(this.addressListInvoice && this.addressListInvoice.length > 0);
+        },
+
+        /**
+         * Check whether the shipping address list is empty
+         * @returns {boolean}
+         */
+        isAddressListEmptyShipping: function()
+        {
+            return !(this.addressListShipping && this.addressListShipping.length > 0);
         },
 
         /**
@@ -107,16 +160,16 @@ Vue.component("address-select-group", {
         },
 
         /**
-         * Show the add icon
+         * Show the add icon for invoice
          */
-        showAdd: function()
+        showAdd: function(addressType)
         {
-            this.modalTypeInvoice = "create";
-            this.addressToEditInvoice = {};
-            this.updateHeadline();
+            this.modalType = "create";
+            this.addressToEdit = {};
+            this.updateHeadline(addressType);
 
-            $(".wrapper-bottom").append($("#" + this.addressModalIdInvoice));
-            this.addressModalInvoice.show();
+            $(".wrapper-bottom").append($("#" + this.addressModalId));
+            this.addressModal.show();
         },
 
         /**
@@ -125,12 +178,12 @@ Vue.component("address-select-group", {
          */
         showEdit: function(address)
         {
-            this.modalTypeInvoice = "update";
-            this.addressToEditInvoice = address;
+            this.modalType = "update";
+            this.addressToEdit = address;
             this.updateHeadline();
 
             $(".wrapper-bottom").append($("#" + this.addressModalIdInvoice));
-            this.addressModalInvoice.show();
+            this.addressModal.show();
         },
 
         /**
@@ -138,19 +191,19 @@ Vue.component("address-select-group", {
          */
         close: function()
         {
-            this.addressModalInvoice.hide();
+            this.addressModal.hide();
         },
 
         /**
          * Dynamically create the header line in the modal
          */
-        updateHeadline: function()
+        updateHeadline: function(addressType)
         {
             var headline;
 
-            if (this.addressTypeInvoice === "2")
+            if (addressType === "2")
             {
-                if (this.modalTypeInvoice === "update")
+                if (this.modalType === "update")
                 {
                     headline = Translations.Callisto.orderShippingAddressEdit;
                 }
@@ -159,7 +212,7 @@ Vue.component("address-select-group", {
                     headline = Translations.Callisto.orderShippingAddressCreate;
                 }
             }
-            else if (this.modalTypeInvoice === "update")
+            else if (this.modalType === "update")
             {
                 headline = Translations.Callisto.orderInvoiceAddressEdit;
             }
@@ -168,7 +221,7 @@ Vue.component("address-select-group", {
                 headline = Translations.Callisto.orderInvoiceAddressCreate;
             }
 
-            this.headlineInvoice = headline;
+            this.headline = headline;
         }
     },
 
