@@ -1,13 +1,10 @@
 {{ component( "PluginCallisto::Customer.Components.AddressSelect.AddressSelect") }}
 {{ component( "PluginCallisto::Customer.Components.AddressSelect.CreateUpdateAddress") }}
 <script type="x/template" id="vue-address-select-group">
-    <input type="checkbox" v-model="isDifferingShippingAddress"/> Differing Shipping Address?
-
     <header class="m-b-1">
         <h3>{{ trans("PluginCallisto::Callisto.orderInvoiceAddress") }}</h3>
     </header>
     <div class="invoice-addresses-select">
-
         <div>
             <div class="cmp cmp-address-list m-b-3">
                 <div class="dropdown items">
@@ -20,21 +17,22 @@
                             aria-expanded="false"
                     >
                         <div class="item-inner">
-                    <span class="item-content">
-                        <template v-if="!isAddressListEmptyInvoice()">
-                            <strong v-if="selectedAddressInvoice.name1 && selectedAddressInvoice.name1.length > 0">${selectedAddressInvoice.name1}</strong>
-                            <strong v-if="!this.selectedAddressInvoice.name1 || this.selectedAddressInvoice.name1.length == 0">${selectedAddressInvoice.name2} ${selectedAddressInvoice.name3}</strong>
-                            <span v-else>${selectedAddressInvoice.name2} ${selectedAddressInvoice.name3}</span>
-                            <span>${selectedAddressInvoice.address1} ${selectedAddressInvoice.address2}</span>
-                            <span>${selectedAddressInvoice.postalCode} ${selectedAddressInvoice.town}</span>
-                        </template>
+                            <span class="item-content">
+                                <template v-if="!isAddressListEmptyInvoice()">
+                                    <strong v-if="selectedAddressInvoice.name1 && selectedAddressInvoice.name1.length > 0">${selectedAddressInvoice.name1}</strong>
+                                    <strong v-if="!this.selectedAddressInvoice.name1 || this.selectedAddressInvoice.name1.length == 0">${selectedAddressInvoice.name2} ${selectedAddressInvoice.name3}</strong>
+                                    <span v-else>${selectedAddressInvoice.name2} ${selectedAddressInvoice.name3}</span>
+                                    <span>${selectedAddressInvoice.address1} ${selectedAddressInvoice.address2}</span>
+                                    <span>${selectedAddressInvoice.postalCode} ${selectedAddressInvoice.town}</span>
+                                </template>
 
-                        <p v-if="!isAddressListEmptyInvoice() && !selectedAddressIdInvoice"
-                           class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressPleaseSelect") }} -</p>
-                        <p v-if="isAddressListEmptyInvoice()"
-                           class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressNoAddress") }} -</p>
-                    </span>
-
+                                <p v-if="!isAddressListEmptyInvoice() && !selectedAddressIdInvoice"
+                                   class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressPleaseSelect") }}
+                                    -</p>
+                                <p v-if="isAddressListEmptyInvoice()"
+                                   class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressNoAddress") }}
+                                    -</p>
+                            </span>
                         </div>
                     </div>
 
@@ -58,28 +56,26 @@
                                 >
                                 <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
 
-                            <span class="item-content small">
-                                <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
-                                <strong v-if="!this.address.name1 || this.address.name1.length == 0">${address.name2} ${address.name3}</strong>
-                                <span v-else>${address.name2} ${address.name3}</span>
-                                <span>${address.name4}</span>
-                                <span>${address.address1} ${address.address2}</span>
-                                <span>${address.postalCode} ${address.town}</span>
-                            </span><!--
-                            --><span class="item-edit">
-                                    <a href="#" class="btn btn-default btn-xs" @click.prevent="showEdit(address)" data-toggle="tooltip"
-                                       data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressChangeAddress") }}">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                            </span>
-
+                                    <span class="item-content small">
+                                        <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
+                                        <strong v-if="!this.address.name1 || this.address.name1.length == 0">${address.name2} ${address.name3}</strong>
+                                        <span v-else>${address.name2} ${address.name3}</span>
+                                        <span>${address.name4}</span>
+                                        <span>${address.address1} ${address.address2}</span>
+                                        <span>${address.postalCode} ${address.town}</span>
+                                    </span>
+                                    <span class="item-edit">
+                                        <a href="#" class="btn btn-default btn-xs" @click.prevent="showEdit(address)" data-toggle="tooltip"
+                                           data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressChangeAddress") }}">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
                                 </label>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
             <div id="addressModal${_uid}">
                 <div class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
@@ -107,16 +103,12 @@
                 </div>
             </div>
         </div>
-
-        {#<invoice-address-select v-bind:address-list="addressListInvoice"#}
-                                {#v-bind:selected-address-id="selectedAddressIdInvoiceInvoice"></invoice-address-select>#}
     </div>
 
     <header class="m-b-1">
         <h3>{{ trans("PluginCallisto::Callisto.orderShippingAddress") }}</h3>
     </header>
     <div class="shipping-addresses-select">
-
         <div>
             <div class="cmp cmp-address-list m-b-3">
                 <div class="dropdown items">
@@ -129,21 +121,25 @@
                             aria-expanded="false"
                     >
                         <div class="item-inner">
-                    <span class="item-content">
-                        <template v-if="!isAddressListEmptyShipping()">
-                            <strong v-if="selectedAddressShipping.name1 && selectedAddressShipping.name1.length > 0">${selectedAddressShipping.name1}</strong>
-                            <strong v-if="!this.selectedAddressShipping.name1 || this.selectedAddressShipping.name1.length == 0">${selectedAddressShipping.name2} ${selectedAddressShipping.name3}</strong>
-                            <span v-else>${selectedAddressShipping.name2} ${selectedAddressShipping.name3}</span>
-                            <span>${selectedAddressShipping.address1} ${selectedAddressShipping.address2}</span>
-                            <span>${selectedAddressShipping.postalCode} ${selectedAddressShipping.town}</span>
-                        </template>
+                            <span v-if="selectedAddressShipping.id == 'defaultAddress'">
+                                <p class="text-muted small font-italic p-t-1">- same like invoice -</p>
+                            </span>
+                            <span v-else class="item-content">
+                                <template v-if="!isAddressListEmptyShipping()">
+                                    <strong v-if="selectedAddressShipping.name1 && selectedAddressShipping.name1.length > 0">${selectedAddressShipping.name1}</strong>
+                                    <strong v-if="!this.selectedAddressShipping.name1 || this.selectedAddressShipping.name1.length == 0">${selectedAddressShipping.name2} ${selectedAddressShipping.name3}</strong>
+                                    <span v-else>${selectedAddressShipping.name2} ${selectedAddressShipping.name3}</span>
+                                    <span>${selectedAddressShipping.address1} ${selectedAddressShipping.address2}</span>
+                                    <span>${selectedAddressShipping.postalCode} ${selectedAddressShipping.town}</span>
+                                </template>
 
-                        <p v-if="!isAddressListEmptyShipping() && !selectedAddressIdShipping"
-                           class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressPleaseSelect") }} -</p>
-                        <p v-if="isAddressListEmptyShipping()"
-                           class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressNoAddress") }} -</p>
-                    </span>
-
+                                <p v-if="!isAddressListEmptyShipping() && !selectedAddressIdShipping"
+                                   class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressPleaseSelect") }}
+                                    -</p>
+                                <p v-if="isAddressListEmptyShipping()"
+                                   class="text-muted small font-italic p-t-1">- {{ trans("PluginCallisto::Callisto.addressNoAddress") }}
+                                    -</p>
+                            </span>
                         </div>
                     </div>
 
@@ -166,21 +162,23 @@
                                         @change="onAddressChangedShipping(index)"
                                 >
                                 <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
-
-                            <span class="item-content small">
-                                <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
-                                <strong v-if="!this.address.name1 || this.address.name1.length == 0">${address.name2} ${address.name3}</strong>
-                                <span v-else>${address.name2} ${address.name3}</span>
-                                <span>${address.name4}</span>
-                                <span>${address.address1} ${address.address2}</span>
-                                <span>${address.postalCode} ${address.town}</span>
-                            </span><!--
-                            --><span class="item-edit">
-                                    <a href="#" class="btn btn-default btn-xs" @click.prevent="showEdit(address)" data-toggle="tooltip"
-                                       data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressChangeAddress") }}">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                            </span>
+                                    <span v-if="address.id == 'defaultAddress'">
+                                        <p class="text-muted small font-italic p-t-1">- same like invoice -</p>
+                                    </span>
+                                    <span v-else class="item-content small">
+                                        <strong v-if="address.name1 && address.name1.length > 0">${address.name1}</strong>
+                                        <strong v-if="!this.address.name1 || this.address.name1.length == 0">${address.name2} ${address.name3}</strong>
+                                        <span v-else>${address.name2} ${address.name3}</span>
+                                        <span>${address.name4}</span>
+                                        <span>${address.address1} ${address.address2}</span>
+                                        <span>${address.postalCode} ${address.town}</span>
+                                    </span>
+                                    <span v-if="address.id != 'defaultAddress'" class="item-edit">
+                                        <a href="#" class="btn btn-default btn-xs" @click.prevent="showEdit(address)" data-toggle="tooltip"
+                                           data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressChangeAddress") }}">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
 
                                 </label>
                             </li>
@@ -188,37 +186,6 @@
                     </div>
                 </div>
             </div>
-
-
-            {#<div id="addressModalShipping${_uid}">#}
-                {#<div class="modal fade" tabindex="-1" role="dialog">#}
-                    {#<div class="modal-dialog" role="document">#}
-                        {#<div class="modal-content">#}
-                            {#<div class="modal-header">#}
-                                {#<button type="button" class="close" @click="close" aria-label="Close">#}
-                                    {#<span aria-hidden="true">&times;</span>#}
-                                {#</button>#}
-                                {#<h4 class="modal-title">${headline}</h4>#}
-                            {#</div>#}
-
-                            {#<div class="modal-body">#}
-                                {#<fieldset>#}
-                                    {#<create-update-address#}
-                                            {#:address-data="addressToEdit"#}
-                                            {#:address-modal="addressModal"#}
-                                            {#:address-list="addressList"#}
-                                            {#:modal-type="modalType"#}
-                                            {#:address-type="addressType">#}
-                                    {#</create-update-address>#}
-                                {#</fieldset>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
         </div>
-
-        {#<shipping-address-select v-bind:address-list="addressListShipping"#}
-                                 {#v-bind:selected-address-id="selectedAddressIdInvoiceShipping"></shipping-address-select>#}
     </div>
 </script>

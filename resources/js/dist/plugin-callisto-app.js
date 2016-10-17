@@ -517,6 +517,7 @@ Vue.component("address-select", {
 
 },{"services/ModalService":44}],11:[function(require,module,exports){
 var ModalService = require("services/ModalService");
+var CheckoutService = require("services/CheckoutService");
 
 Vue.component("address-select-group", {
 
@@ -532,28 +533,22 @@ Vue.component("address-select-group", {
     data: function()
     {
         return {
-            isDifferingShippingAddress: true,
             addressListShippingInit: {},
             selectedAddressIdShippingInit: "",
             selectedAddressShippingInit: "",
 
-            addressModal: {},
-
             selectedAddressInvoice: {},
-            // addressModalInvoice   : {},
-            modalTypeInvoice      : "",
-            headlineInvoice       : "",
+            selectedAddressShipping: {},
+
             addressToEditInvoice  : {},
             addressModalIdInvoice : "",
 
-            selectedAddressShipping: {},
-            // addressModalShipping   : {},
-            modalTypeShipping      : "",
-            headlineShipping       : "",
             addressToEditShipping  : {},
             addressModalIdShipping : "",
 
+            modalType: "",
             headline: "",
+            addressModal: {},
             addressModalId: ""
         };
     },
@@ -578,14 +573,27 @@ Vue.component("address-select-group", {
             this.addressListInvoice = [];
         }
 
+        // Adds the "same as invoice address" to the dropdown
+        this.addressListShipping.unshift({
+            id: "defaultAddress"
+        });
+
         if (!this.isAddressListEmptyShipping())
         {
+            var isAddressSet = false;
+
             for (var index2 in this.addressListShipping)
             {
                 if (this.addressListShipping[index2].id === this.selectedAddressIdShipping)
                 {
                     this.selectedAddressShipping = this.addressListShipping[index2];
+                    isAddressSet = true;
                 }
+            }
+
+            if (!isAddressSet)
+            {
+                this.selectedAddressShipping = this.addressListShipping[0];
             }
         }
         else
@@ -594,7 +602,6 @@ Vue.component("address-select-group", {
         }
 
         this.addressModalId = "addressModal" + this._uid;
-        // this.addressModalIdShipping = "addressModalShipping" + this._uid;
     },
 
     /**
@@ -603,31 +610,10 @@ Vue.component("address-select-group", {
     ready: function()
     {
         this.addressModal = ModalService.findModal(document.getElementById(this.addressModalId));
-        // this.addressModalShipping = ModalService.findModal(document.getElementById(this.addressModalIdShipping));
     },
 
     methods:
     {
-        onCheckChanged: function()
-        {
-            if (!this.isDifferingShippingAddress)
-            {
-                this.addressListShippingInit = this.addressListShipping;
-                this.selectedAddressIdShippingInit = this.selectedAddressIdShipping;
-                this.selectedAddressShippingInit = this.selectedAddressShipping;
-
-                this.addressListShipping = this.addressListInvoice;
-                this.selectedAddressIdShipping = this.selectedAddressIdInvoice;
-                this.selectedAddressShipping = this.selectedAddressInvoice;
-            }
-            else
-            {
-                this.addressListShipping = this.addressListShippingInit;
-                this.selectedAddressIdInvoice = this.selectedAddressIdShippingInit;
-                this.selectedAddressShipping = this.selectedAddressShippingInit;
-            }
-        },
-
         /**
          * Update the selected invoice address
          * @param index
@@ -636,7 +622,9 @@ Vue.component("address-select-group", {
         {
             this.selectedAddressInvoice = this.addressListInvoice[index];
 
-            this.$dispatch("address-changed-invoice", this.selectedAddressInvoice);
+            CheckoutService.setBillingAddressId(this.selectedAddressInvoice.id);
+
+            // this.$dispatch("address-changed-invoice", this.selectedAddressInvoice);
         },
 
         /**
@@ -647,7 +635,16 @@ Vue.component("address-select-group", {
         {
             this.selectedAddressShipping = this.addressListShipping[index];
 
-            this.$dispatch("address-changed-shipping", this.selectedAddressShipping);
+            if (this.selectedAddressShipping.id === "defaultAddress")
+            {
+                CheckoutService.setDeliveryAddressId(this.selectedAddressInvoice.id);
+            }
+            else
+            {
+                CheckoutService.setDeliveryAddressId(this.selectedAddressShipping.id);
+            }
+
+            // this.$dispatch("address-changed-shipping", this.selectedAddressShipping);
         },
 
         /**
@@ -678,7 +675,7 @@ Vue.component("address-select-group", {
         },
 
         /**
-         * Show the add icon for invoice
+         * Show the add icon
          */
         showAdd: function(addressType)
         {
@@ -741,27 +738,10 @@ Vue.component("address-select-group", {
 
             this.headline = headline;
         }
-    },
-
-    watch:
-    {
-        isDifferingShippingAddress: function()
-        {
-            this.onCheckChanged();
-        }
-    },
-
-    events:
-    {
-        "address-changed": function(message)
-        {
-            console.log("address-changed");
-            console.log("Message: " + message);
-        }
     }
 });
 
-},{"services/ModalService":44}],12:[function(require,module,exports){
+},{"services/CheckoutService":42,"services/ModalService":44}],12:[function(require,module,exports){
 var AddressService    = require("services/AddressService");
 var ValidationService = require("services/ValidationService");
 
