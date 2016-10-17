@@ -121,7 +121,7 @@
                             aria-expanded="false"
                     >
                         <div class="item-inner">
-                            <span v-if="selectedAddressShipping.id == 'defaultAddress'">
+                            <span v-if="selectedAddressShipping.id == -999">
                                 <p class="text-muted small font-italic p-t-1">- same like invoice -</p>
                             </span>
                             <span v-else class="item-content">
@@ -162,7 +162,7 @@
                                         @change="onAddressChangedShipping(index)"
                                 >
                                 <label for="addressSelectItem${ _uid }${ address.id }" class="item-inner">
-                                    <span v-if="address.id == 'defaultAddress'">
+                                    <span v-if="address.id == -999">
                                         <p class="text-muted small font-italic p-t-1">- same like invoice -</p>
                                     </span>
                                     <span v-else class="item-content small">
@@ -173,7 +173,7 @@
                                         <span>${address.address1} ${address.address2}</span>
                                         <span>${address.postalCode} ${address.town}</span>
                                     </span>
-                                    <span v-if="address.id != 'defaultAddress'" class="item-edit">
+                                    <span v-if="address.id != -999" class="item-edit">
                                         <a href="#" class="btn btn-default btn-xs" @click.prevent="showEdit(address)" data-toggle="tooltip"
                                            data-placement="right" title="{{ trans("PluginCallisto::Callisto.addressChangeAddress") }}">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

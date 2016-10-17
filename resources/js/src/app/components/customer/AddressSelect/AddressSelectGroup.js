@@ -40,6 +40,9 @@ Vue.component("address-select-group", {
      */
     created: function()
     {
+        console.log("InvoiceID: " + this.selectedAddressIdInvoice);
+        console.log("ShippingID: " + this.selectedAddressIdShipping);
+
         if (!this.isAddressListEmptyInvoice())
         {
             for (var index in this.addressListInvoice)
@@ -55,10 +58,10 @@ Vue.component("address-select-group", {
             this.addressListInvoice = [];
         }
 
-        // Adds the "same as invoice address" to the dropdown
-        this.addressListShipping.unshift({
-            id: "defaultAddress"
-        });
+        // // Adds the "same as invoice address" to the dropdown
+        // this.addressListShipping.unshift({
+        //     id: -999
+        // });
 
         if (!this.isAddressListEmptyShipping())
         {
@@ -75,7 +78,7 @@ Vue.component("address-select-group", {
 
             if (!isAddressSet)
             {
-                this.selectedAddressShipping = this.addressListShipping[0];
+                // this.selectedAddressShipping = this.addressListShipping[0];
             }
         }
         else
@@ -105,8 +108,7 @@ Vue.component("address-select-group", {
             this.selectedAddressInvoice = this.addressListInvoice[index];
 
             CheckoutService.setBillingAddressId(this.selectedAddressInvoice.id);
-
-            // this.$dispatch("address-changed-invoice", this.selectedAddressInvoice);
+            // this.$dispatch("address-changed", this.selectedAddressInvoice);
         },
 
         /**
@@ -117,16 +119,8 @@ Vue.component("address-select-group", {
         {
             this.selectedAddressShipping = this.addressListShipping[index];
 
-            if (this.selectedAddressShipping.id === "defaultAddress")
-            {
-                CheckoutService.setDeliveryAddressId(this.selectedAddressInvoice.id);
-            }
-            else
-            {
-                CheckoutService.setDeliveryAddressId(this.selectedAddressShipping.id);
-            }
-
-            // this.$dispatch("address-changed-shipping", this.selectedAddressShipping);
+            CheckoutService.setDeliveryAddressId(this.selectedAddressShipping.id);
+            // this.$dispatch("address-changed", this.selectedAddressShipping);
         },
 
         /**
